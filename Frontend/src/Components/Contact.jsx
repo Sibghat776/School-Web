@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import useFetch from "../Hooks/useFetch";
+import { showToast } from "../utils/commonFunctions";
+import axios from "axios";
+import { baseUrl } from "../utils/baseUrl";
 
 const Contact = () => {
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [message, setMessage] = useState("")
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (!name || !email || !message) showToast("Please fill all Fields !", "error", "dark")
+        const res = await axios.post(`${baseUrl}contact/sendMessage`, {
+            name,
+            email,
+            message
+        })
+        showToast(res.data.message, "success", "light")
+        setName("")
+        setEmail("")
+        setMessage("")
+    }
     return (
         <>
-            <Navbar admission={"admission"} />
-             <section className="min-h-screen bg-gradient-to-br from-[#e8f3f1] via-white to-[#dbece2] py-16 px-6">
-                <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+            <Navbar />
+            <section className="min-h-fit bg-gradient-to-br from-[#e8f3f1] via-white to-[#dbece2] py-28 px-6">
+                <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
+
                     {/* Left Column */}
                     <div>
                         <h2 className="text-4xl font-bold text-[#1d1449] mb-6">Get in Touch</h2>
@@ -14,15 +37,46 @@ const Contact = () => {
                             Have a question or just want to say hi? We’re here to help and answer any questions you might have.
                         </p>
 
-                        <div className="space-y-4 mb-8 text-[#3d534d]">
-                            <div className="flex items-center gap-3">
-                                <MapPin className="text-[#498138]" />
-                                <span>Noor Public School, Main Road, Karachi</span>
+                        {/* Addresses */}
+                        <div className="space-y-6 mb-8 text-[#3d534d]">
+                            {/* Campus 1 */}
+                            <div>
+                                <h4 className="font-semibold text-lg text-[#1d1449] mb-2">Campus 1</h4>
+                                <div className="flex items-start gap-3">
+                                    <MapPin className="text-[#498138] mt-1" />
+                                    <span>Ghazi Nagar, Siddique Wahab Road, Street # 20, Karachi</span>
+                                </div>
                             </div>
+
                             <div className="flex items-center gap-3">
                                 <Phone className="text-[#498138]" />
-                                <span>+92 300 1234567</span>
+                                <span>+92 315 2779033</span>
                             </div>
+
+                            {/* Email */}
+                            <div className="flex items-center gap-3">
+                                <Mail className="text-[#498138]" />
+                                <a href="mailto:noorpubsch@gmail.com" className="hover:underline">
+                                    noorpubsch@gmail.com
+                                </a>
+                            </div>
+
+                            {/* Campus 2 */}
+                            <div>
+                                <h4 className="font-semibold text-lg text-[#1d1449] mb-2">Campus 2</h4>
+                                <div className="flex items-start gap-3">
+                                    <MapPin className="text-[#498138] mt-1" />
+                                    <span>Ranchorline KMC Store, Nishter Road, Near Masjid e Quba, Kaka Street, Karachi</span>
+                                </div>
+                            </div>
+
+                            {/* Phone */}
+                            <div className="flex items-center gap-3">
+                                <Phone className="text-[#498138]" />
+                                <span>+92 317 2108821</span>
+                            </div>
+
+                            {/* Email */}
                             <div className="flex items-center gap-3">
                                 <Mail className="text-[#498138]" />
                                 <a href="mailto:noorpubsch@gmail.com" className="hover:underline">
@@ -56,16 +110,20 @@ const Contact = () => {
                                 <label className="text-sm font-medium text-[#3d534d]">Name</label>
                                 <input
                                     type="text"
+                                    value={name}
                                     placeholder="Your Name"
                                     className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#94c484]"
+                                    onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-[#3d534d]">Email</label>
                                 <input
                                     type="email"
+                                    value={email}
                                     placeholder="you@example.com"
                                     className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#94c484]"
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -74,11 +132,14 @@ const Contact = () => {
                                     rows="4"
                                     placeholder="Your message..."
                                     className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#94c484]"
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
                                 ></textarea>
                             </div>
                             <button
                                 type="submit"
                                 className="bg-[#1d1449] text-white px-6 py-2 rounded-full hover:bg-[#2a1f61] transition duration-300"
+                                onClick={handleSubmit}
                             >
                                 Submit
                             </button>

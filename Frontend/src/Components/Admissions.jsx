@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 const Admission = () => {
     return (
         <>
-            <Navbar admission="admission" />
+            <Navbar />
             <div className="bg-[#dee9ee] min-h-fit py-10 px-4 md:px-16">
                 <div className="max-w-5xl mx-auto">
                     <h1 className="text-4xl font-bold text-center text-[#1d1449] mb-4">Admissions at Noor Public School</h1>

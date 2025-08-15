@@ -5,10 +5,12 @@ import Admission from "./Components/Admissions";
 import About from "./Components/About";
 import PageNotFound from "./Components/PageNotFound";
 import Contact from "./Components/Contact";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
     <div>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admission" element={<Admission />} />

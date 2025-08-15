@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 
-const Navbar = ({ admission }) => {
+const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const location = useLocation();
@@ -22,15 +22,19 @@ const Navbar = ({ admission }) => {
 
     return (
         <nav
-            className={`${admission == "admission" ? "w-full z-50 transition-all duration-300 shadow-md" : "fixed top-0 left-0 w-full z-50 transition-all duration-300 shadow-md"} ${isScrolled ? "bg-[#1d1449]/80 backdrop-blur-md" : "bg-[#1d1449]/50"
-                }`}
+            className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 shadow-md 
+                ${isScrolled
+                    ? "bg-[#1d5546]/80 backdrop-blur-md"  // Scroll hone par
+                    : "bg-[#1d5546]/70"                   // Default
+                }
+`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo & Brand */}
                     <Link to="/" className="flex items-center gap-3">
                         <img src={logo} alt="Logo" className="h-12 object-contain" />
-                        <span onClick={() => window.scrollTo(0 , 0)} className="text-white font-semibold text-lg md:text-xl tracking-wide hidden md:inline-block">
+                        <span onClick={() => window.scrollTo(0, 0)} className="text-white font-semibold text-lg md:text-xl tracking-wide hidden md:inline-block">
                             NOOR PUBLIC SCHOOL
                         </span>
                     </Link>
@@ -70,32 +74,34 @@ const Navbar = ({ admission }) => {
             </div>
 
             {/* Mobile Dropdown */}
-            {open && (
-                <div className="md:hidden bg-[#1d1449]/90 backdrop-blur-md px-6 pt-4 pb-6 space-y-4 rounded-b-xl transition-all duration-300">
-                    <Link to="/" className="block text-white hover:text-[#94c484]">
-                        Home
-                    </Link>
-                    <a href="#about" className="block text-white hover:text-[#94c484]">
-                        About
-                    </a>
-                    <Link to="/admission" className="block text-white hover:text-[#94c484]">
-                        Admissions
-                    </Link>
-                    <Link to="/contact" className="block text-white hover:text-[#94c484]">
-                        Contact
-                    </Link>
+            {
+                open && (
+                    <div className="md:hidden bg-[#1d1449]/90 backdrop-blur-md px-6 pt-4 pb-6 space-y-4 rounded-b-xl transition-all duration-300">
+                        <Link to="/" className="block text-white hover:text-[#94c484]">
+                            Home
+                        </Link>
+                        <a href="#about" className="block text-white hover:text-[#94c484]">
+                            About
+                        </a>
+                        <Link to="/admission" className="block text-white hover:text-[#94c484]">
+                            Admissions
+                        </Link>
+                        <Link to="/contact" className="block text-white hover:text-[#94c484]">
+                            Contact
+                        </Link>
 
-                    <div className="pt-3 space-y-2">
-                        <button className="w-full py-2 border border-white text-white rounded-full hover:bg-white hover:text-[#1d1449] transition duration-200">
-                            Sign In
-                        </button>
-                        <button className="w-full py-2 bg-[#498138] text-white rounded-full hover:bg-[#234e18] transition duration-200">
-                            Sign Up
-                        </button>
+                        <div className="pt-3 space-y-2">
+                            <button className="w-full py-2 border border-white text-white rounded-full hover:bg-white hover:text-[#1d1449] transition duration-200">
+                                Sign In
+                            </button>
+                            <button className="w-full py-2 bg-[#498138] text-white rounded-full hover:bg-[#234e18] transition duration-200">
+                                Sign Up
+                            </button>
+                        </div>
                     </div>
-                </div>
-            )}
-        </nav>
+                )
+            }
+        </nav >
     );
 };
 

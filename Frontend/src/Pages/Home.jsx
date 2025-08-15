@@ -11,9 +11,6 @@ const Home = () => {
     <div className="bg-white overflow-x-hidden scroll-smooth">
       <Navbar />
       <Hero />
-      {/* <section id="about">
-        <About />
-      </section> */}
       <NoticeBoard />
       <Gallery />
       <Footer />
