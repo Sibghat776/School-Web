@@ -58,38 +58,6 @@ const Hero = () => {
                     Welcome to Noor Public School
                 </h1>
             </div>
-
-            {/* Stats section (bottom) */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 w-full max-w-5xl px-4">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {/* Box 1 */}
-                    <div className="backdrop-blur-md bg-white/70 rounded-xl p-6 shadow-lg text-center border border-white/30">
-                        <School className="mx-auto text-blue-700 w-10 h-10" />
-                        <p className="text-3xl font-bold text-gray-900 mt-2">
-                            Since <Counter target={1998} />
-                        </p>
-                        <p className="text-gray-700 text-sm">Opening Year</p>
-                    </div>
-
-                    {/* Box 2 */}
-                    <div className="backdrop-blur-md bg-white/70 rounded-xl p-6 shadow-lg text-center border border-white/30">
-                        <GraduationCap className="mx-auto text-green-700 w-10 h-10" />
-                        <p className="text-3xl font-bold text-gray-900 mt-2">
-                            <Counter target={2754} />
-                        </p>
-                        <p className="text-gray-700 text-sm">Students Enrolled</p>
-                    </div>
-
-                    {/* Box 3 */}
-                    <div className="backdrop-blur-md bg-white/70 rounded-xl p-6 shadow-lg text-center border border-white/30">
-                        <Users className="mx-auto text-yellow-600 w-10 h-10" />
-                        <p className="text-3xl font-bold text-gray-900 mt-2">
-                            <Counter target={58} />
-                        </p>
-                        <p className="text-gray-700 text-sm">Qualified Teachers</p>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 };

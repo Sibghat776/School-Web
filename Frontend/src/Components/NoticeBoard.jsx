@@ -40,7 +40,7 @@ const NoticeBoard = () => {
                     {notices.map((notice, index) => (
                         <div
                             key={index}
-                            className={`bg-white rounded-2xl shadow-xl border-l-8 p-6 flex items-start gap-4 transition-transform hover:scale-[1.015] border-l-[6px] bg-gradient-to-r ${notice.color}`}
+                            className={`bg-white rounded-2xl shadow-xl border-l-8 p-6 flex items-start gap-4 transition-transform hover:scale-[1.045] border-l-[6px] bg-gradient-to-r ${notice.color}`}
                         >
                             <div className="flex items-center justify-center w-12 h-12 bg-[#1d1449] rounded-full shadow-md">
                                 {notice.icon}
@@ -49,7 +49,7 @@ const NoticeBoard = () => {
                                 <h3 className="text-xl font-semibold text-[#1d1449] mb-1">
                                     {notice.title}
                                 </h3>
-                                <p className="text-[#333]">{notice.description}</p>
+                                <p className="text-[#335]">{notice.description}</p>
                             </div>
                         </div>
                     ))}
