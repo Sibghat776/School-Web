@@ -1,58 +1,67 @@
 import React from "react";
-import { Megaphone, CalendarDays, AlertTriangle, Info } from "lucide-react";
+import {
+    Megaphone,
+    CalendarDays,
+    AlertTriangle,
+    Info,
+} from "lucide-react";
 
+// Classy deep-gradient colour palette
 const notices = [
     {
         title: "New Admissions Open",
-        description: "Admissions for classes KG to Grade 10 are now open till 15th August 2025.",
-        icon: <Megaphone className="text-white w-6 h-6" />,
-        color: "from-[#34d399] to-[#10b981]",
+        description: "Admissions for classes KG to Grade 10 are now open.",
+        icon: Megaphone,
+        color: "from-[#2E3192] to-[#1BFFFF]",       // Royal Blue → Aqua
     },
     {
         title: "Holiday Notice",
         description: "School will remain closed on 14th August for Independence Day.",
-        icon: <CalendarDays className="text-white w-6 h-6" />,
-        color: "from-[#60a5fa] to-[#3b82f6]",
+        icon: CalendarDays,
+        color: "from-[#8E2DE2] to-[#4A00E0]",       // Purple → Dark Violet
     },
     {
         title: "Exam Schedule Released",
         description: "Mid-term exam schedule is uploaded on the student portal.",
-        icon: <AlertTriangle className="text-white w-6 h-6" />,
-        color: "from-[#f472b6] to-[#ec4899]",
+        icon: AlertTriangle,
+        color: "from-[#0BA360] to-[#3CBA92]",       // Emerald Greens
     },
     {
         title: "Parent-Teacher Meeting",
         description: "PTM will be held on 20th August in the school auditorium.",
-        icon: <Info className="text-white w-6 h-6" />,
-        color: "from-[#fbbf24] to-[#f59e0b]",
+        icon: Info,
+        color: "from-[#f7971e] to-[#ffd200]",       // Sunset Orange → Gold
     },
 ];
 
 const NoticeBoard = () => {
     return (
-        <section className="w-full bg-gradient-to-br from-[#e0f7fa] to-[#e1f5fe] py-16 px-4 sm:px-8 lg:px-20">
+        <section className="w-full bg-[#F4F6F8] py-16 px-5">
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-10 text-[#1d1449]">
-                    📌 Notice Board
+                <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-[#1d1449]">
+                    Notice Board
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-                    {notices.map((notice, index) => (
-                        <div
-                            key={index}
-                            className={`bg-white rounded-2xl shadow-xl border-l-8 p-6 flex items-start gap-4 transition-transform hover:scale-[1.045] border-l-[6px] bg-gradient-to-r ${notice.color}`}
-                        >
-                            <div className="flex items-center justify-center w-12 h-12 bg-[#1d1449] rounded-full shadow-md">
-                                {notice.icon}
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {notices.map((notice, index) => {
+                        const Icon = notice.icon;
+                        return (
+                            <div
+                                key={index}
+                                className={`relative rounded-3xl p-[1px] shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 cursor-pointer bg-gradient-to-r ${notice.color}`}
+                            >
+                                <div className="bg-white rounded-3xl p-6 h-full w-full">
+                                    <div className="mb-3 flex items-center justify-center w-12 h-12 rounded-full bg-[#1d1449] text-white">
+                                        <Icon size={24} />
+                                    </div>
+                                    <h3 className="text-xl font-semibold mb-1 text-[#1d1449]">
+                                        {notice.title}
+                                    </h3>
+                                    <p className="text-gray-700">{notice.description}</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 className="text-xl font-semibold text-[#1d1449] mb-1">
-                                    {notice.title}
-                                </h3>
-                                <p className="text-[#335]">{notice.description}</p>
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </section>

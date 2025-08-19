@@ -1,6 +1,6 @@
 import e from "express";
 import { createRateLimiter } from "../utils/createRatelimiter.js";
-import { sendMessage } from "../Controllers/contactControler.js";
+import { sendMessage } from "../Controllers/contactController.js";
 
 export let contactRoute = e.Router()
 

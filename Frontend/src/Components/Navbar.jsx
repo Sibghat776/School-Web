@@ -17,9 +17,13 @@ const Navbar = () => {
     }, []);
 
     const navLinkClass = (path) =>
-        `relative transition duration-300 hover:text-[#94c484] ${location.pathname === path ? "text-[#94c484]" : "text-white"
+        `relative transition duration-200 hover:text-[#94c400] ${location.pathname === path ? "text-[#5] underline font-extrabold" : "text-white"
         }`;
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setOpen(false);
+    }
     return (
         <nav
             className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 shadow-md 
@@ -34,34 +38,28 @@ const Navbar = () => {
                     {/* Logo & Brand */}
                     <Link to="/" className="flex items-center gap-3">
                         <img src={logo} alt="Logo" className="h-12 object-contain" />
-                        <span onClick={() => window.scrollTo(0, 0)} className="text-white font-semibold text-lg md:text-xl tracking-wide hidden md:inline-block">
+                        <span onClick={scrollToTop} className="text-white font-semibold text-lg md:text-xl tracking-wide hidden md:inline-block">
                             NOOR PUBLIC SCHOOL
                         </span>
                     </Link>
 
                     {/* Desktop Nav */}
                     <div className="hidden md:flex items-center gap-8">
-                        <Link to="/" className={navLinkClass("/")}>
+                        <Link to="/" onClick={scrollToTop} className={navLinkClass("/")}>
                             Home
                         </Link>
-                        <a href="/about" className="text-white hover:text-[#94c484] transition">
+                        <Link to="/about" onClick={scrollToTop} className={navLinkClass("/about")}>
                             About
-                        </a>
-                        <Link to="/admission" className={navLinkClass("/admission")}>
+                        </Link>
+                        <Link to="/admission" onClick={scrollToTop} className={navLinkClass("/admission")}>
                             Admissions
                         </Link>
-                        <Link to="/contact" className={navLinkClass("/contact")}>
+                        <Link to="/gallery" onClick={scrollToTop} className={navLinkClass("/gallery")}>
+                            Gallery
+                        </Link>
+                        <Link to="/contact" onClick={scrollToTop} className={navLinkClass("/contact")}>
                             Contact
                         </Link>
-
-                        <div className="ml-4 flex gap-2">
-                            <button className="px-4 py-1.5 text-sm border border-white text-white rounded-full hover:bg-white hover:text-[#1d1449] transition duration-200">
-                                Sign In
-                            </button>
-                            <button className="px-4 py-1.5 text-sm bg-[#498138] text-white rounded-full hover:bg-[#234e18] transition duration-200">
-                                Sign Up
-                            </button>
-                        </div>
                     </div>
 
                     {/* Mobile Menu Toggle */}
@@ -77,27 +75,21 @@ const Navbar = () => {
             {
                 open && (
                     <div className="md:hidden bg-[#1d1449]/90 backdrop-blur-md px-6 pt-4 pb-6 space-y-4 rounded-b-xl transition-all duration-300">
-                        <Link to="/" className="block text-white hover:text-[#94c484]">
+                        <Link to="/" onClick={scrollToTop} className="block text-white hover:text-[#94c484]">
                             Home
                         </Link>
-                        <a href="#about" className="block text-white hover:text-[#94c484]">
+                        <Link to="/about" onClick={scrollToTop} className="block text-white hover:text-[#94c484]">
                             About
-                        </a>
-                        <Link to="/admission" className="block text-white hover:text-[#94c484]">
+                        </Link>
+                        <Link to="/admission" onClick={scrollToTop} className="block text-white hover:text-[#94c484]">
                             Admissions
                         </Link>
-                        <Link to="/contact" className="block text-white hover:text-[#94c484]">
+                        <Link to="/gallery" onClick={scrollToTop} className="block text-white hover:text-[#94c484]">
+                            Gallery
+                        </Link>
+                        <Link to="/contact" onClick={scrollToTop} className="block text-white hover:text-[#94c484]">
                             Contact
                         </Link>
-
-                        <div className="pt-3 space-y-2">
-                            <button className="w-full py-2 border border-white text-white rounded-full hover:bg-white hover:text-[#1d1449] transition duration-200">
-                                Sign In
-                            </button>
-                            <button className="w-full py-2 bg-[#498138] text-white rounded-full hover:bg-[#234e18] transition duration-200">
-                                Sign Up
-                            </button>
-                        </div>
                     </div>
                 )
             }

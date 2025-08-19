@@ -6,6 +6,7 @@ import About from "./Components/About";
 import PageNotFound from "./Components/PageNotFound";
 import Contact from "./Components/Contact";
 import { ToastContainer } from "react-toastify";
+import Gallery from "./Components/Gallery";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/admission" element={<Admission />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>

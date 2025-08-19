@@ -2,12 +2,13 @@ import React from 'react';
 import { GraduationCap, BookOpenText, CalendarCheck, Users } from 'lucide-react';
 import Footer from './Footer';
 import Navbar from './Navbar';
+import { getWhatsappLink } from '../utils/commonFunctions';
 
 const Admission = () => {
     return (
         <>
             <Navbar />
-            <div className="bg-[#dee9ee] min-h-fit py-10 px-4 md:px-16">
+            <div className="bg-[#dee9ee] min-h-fit py-20 px-4 md:px-16">
                 <div className="max-w-5xl mx-auto">
                     <h1 className="text-4xl font-bold text-center text-[#1d1449] mb-4">Admissions at Noor Public School</h1>
                     <p className="text-center text-gray-700 text-lg mb-10">
@@ -67,8 +68,29 @@ const Admission = () => {
                             For further details, please visit the school or call us during working hours.
                         </p>
                         <p className="text-md text-[#1d1449] font-semibold mt-2">
-                            Contact: 0315 2779033 | Email: <a href="mailto:noorpubsch@gmail.com">noorpubsch@gmail.com</a>
+                            Contact:{" "}
+                            {getWhatsappLink("03152779033", true) ? ( // <-- yaha condition laga do ke kya yeh number WhatsApp pe hai?
+                                <a
+                                    href="https://wa.me/923152779033"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-green-600 hover:underline"
+                                >
+                                    0315 2779033
+                                </a>
+                            ) : (
+                                <span>0315 2779033</span>
+                            )}
+                            {"  |  "}
+                            Email:{" "}
+                            <a
+                                href="mailto:noorpubsch@gmail.com"
+                                className="text-blue-600 hover:underline"
+                            >
+                                noorpubsch@gmail.com
+                            </a>
                         </p>
+
                     </div>
                 </div>
             </div>
