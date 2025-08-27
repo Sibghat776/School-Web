@@ -1,28 +1,38 @@
 import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
-import mongoose from "mongoose"
 import helmet from "helmet"
 import { contactRoute } from "./Routes/contactRoute.js"
+import { connectDB } from "./utils/commonFunctions.js"
 
 dotenv.config()
 
 let app = express()
 
 app.use(express.json())
-app.use(cors(
-    {
-        origin: true,
-        credentials: true
-    }
-))
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+    origin: process.env.CLIENT_URL || true,
+    credentials: true,
+}));
 app.use(helmet())
 
+
+if (process.env.NODE_ENV !== "production") {
+    (async () => {
+        try {
+            await connectDB();
+            app.listen(process.env.PORT || 5000, () => {
+                console.log(`🚀 Server running on ${process.env.PORT || 5000}`);
+            });
+        } catch (err) {
+            console.error("DB connection failed:", err);
+            process.exit(1);
+        }
+    })();
+}
 app.use("/api/contact", contactRoute)
 
-app.listen(process.env.PORT, (req, res) => {
-    console.log("Server is Running on Port Number: " + process.env.PORT)
-})
 
 app.use((err, req, res, next) => {
     let errorStatus = err.status || 500
@@ -35,15 +45,3 @@ app.use((err, req, res, next) => {
         stack: err.stack
     })
 })
-
-function connecDB() {
-    try {
-        mongoose.connect(process.env.MONGO)
-        console.log("Connected to DB")
-
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-connecDB()

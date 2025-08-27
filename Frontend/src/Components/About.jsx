@@ -12,7 +12,6 @@ import Footer from "./Footer";
 const About = () => {
     return (
         <>
-            <Navbar />
             <section
                 id="about"
                 className="bg-[#f2f6f9] text-[#1d1449] py-20 px-6 sm:px-10 md:px-24"
@@ -97,7 +96,6 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <Footer />
         </>
     );
 };

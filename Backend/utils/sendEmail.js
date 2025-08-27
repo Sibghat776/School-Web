@@ -5,7 +5,7 @@ dotenv.config();
 export const sendEmail = async (to, subject, text) => {
     try {
         const transporter = nodemailer.createTransport({
-            service: "Gmail",
+            service: "gmail",
             auth: {
                 user: process.env.EMAIL,
                 pass: process.env.PASSWORD,
@@ -24,9 +24,4 @@ export const sendEmail = async (to, subject, text) => {
     } catch (err) {
         console.error("Error sending email: ", err.message);
     }
-}
-
-export const generateOTP = () => {
-    const otp = Math.floor(100000 + Math.random() * 900000);
-    return otp;
 }

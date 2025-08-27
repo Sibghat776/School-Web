@@ -3,6 +3,7 @@ import { GraduationCap, BookOpenText, CalendarCheck, Users } from 'lucide-react'
 import Footer from './Footer';
 import Navbar from './Navbar';
 import { getWhatsappLink } from '../utils/commonFunctions';
+import AdmissionForm from "../documents/Admission_Form.pdf"
 
 const Admission = () => {
     return (
@@ -62,7 +63,9 @@ const Admission = () => {
                             </ul>
                         </div>
                     </div>
-
+                    <div className="text-center mt-10">
+                        <a href={AdmissionForm} className='bg-black text-white px-6 py-3 shadow-lg hover:bg-gray-800 rounded' >Admission Form</a>
+                    </div>
                     <div className="text-center mt-12">
                         <p className="text-lg text-gray-800">
                             For further details, please visit the school or call us during working hours.
@@ -70,14 +73,25 @@ const Admission = () => {
                         <p className="text-md text-[#1d1449] font-semibold mt-2">
                             Contact:{" "}
                             {getWhatsappLink("03152779033", true) ? ( // <-- yaha condition laga do ke kya yeh number WhatsApp pe hai?
-                                <a
-                                    href="https://wa.me/923152779033"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-green-600 hover:underline"
-                                >
-                                    0315 2779033
-                                </a>
+                                <>
+                                    Campus I : <a
+                                        href="https://wa.me/923172108821"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-green-600 hover:underline"
+                                    >
+                                        0317 2108821
+                                    </a>
+                                    &nbsp;or&nbsp;
+                                    Campus II : <a
+                                        href="https://wa.me/923152779033"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-green-600 hover:underline"
+                                    >
+                                        0315 2779033
+                                    </a>
+                                </>
                             ) : (
                                 <span>0315 2779033</span>
                             )}

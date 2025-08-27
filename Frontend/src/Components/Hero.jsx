@@ -3,10 +3,10 @@ import { School, GraduationCap, Users } from "lucide-react";
 import img1 from "../assets/Slides/Image 2.jpg";
 import img2 from "../assets/Slides/Image 3.jpg";
 import img3 from "../assets/Slides/Image 5.jpg";
+import FounderImg from "../assets/founder.jpeg";
 
 const images = [img1, img2, img3];
 
-// Counter component
 const Counter = ({ target }) => {
     const [count, setCount] = useState(0);
 
@@ -15,8 +15,8 @@ const Counter = ({ target }) => {
         const end = target;
         if (start === end) return;
 
-        let incrementTime = 1000 / end; // speed
-        let timer = setInterval(() => {
+        const incrementTime = 1000 / end;
+        const timer = setInterval(() => {
             start += 1;
             setCount(start);
             if (start === end) clearInterval(timer);
@@ -35,12 +35,11 @@ const Hero = () => {
         const timer = setInterval(() => {
             setIndex((prevIndex) => (prevIndex + 1) % images.length);
         }, 4000);
-
         return () => clearInterval(timer);
     }, []);
 
     return (
-        <div className="relative h-[90vh] w-full overflow-hidden">
+        <div className="relative h-[100vh] w-full overflow-hidden">
             {/* Slideshow */}
             {images.map((img, i) => (
                 <img
@@ -52,29 +51,52 @@ const Hero = () => {
                 />
             ))}
 
-            {/* Title */}
-            <div className="absolute inset-0 bg-black bg-opacity-40 z-30 flex items-center justify-center">
-                <h1 className="text-white text-3xl md:text-2xl font-bold text-center px-4 drop-shadow-lg">
-                    Welcome to
-                    <span className=""> Noor Public School</span>
-                    <div className="mt-4 text-sm md:text-2xl">
-                        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
-                            <div className="flex items-center flex-row gap-2">
-                                <School className="text-yellow-500" />
-                                <Counter target={1000} />+ Students
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <GraduationCap className="text-green-500" />
-                                <Counter target={50} />+ Teachers
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Users className="text-blue-500" />
-                                <Counter target={20} />+ Classes
-                            </div>
-                        </div>
+            {/* Bottom Black Fade Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-30"></div>
+
+            {/* Left-side Content */}
+            <div className="absolute inset-0 z-40 flex items-end justify-start px-6 md:px-16 pb-12 md:pb-20">
+                <div className="max-w-md text-left space-y-4">
+                    {/* Founder Image */}
+                    <div className="flex justify-start">
+                        <img
+                            src={FounderImg}
+                            alt="Founder"
+                            className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-white shadow-lg mb-4"
+                            title="Founder: Mr. Zaka Ullah"
+                        />
                     </div>
 
-                </h1>
+                    {/* Title */}
+                    <h1 className="text-white text-3xl md:text-5xl font-bold drop-shadow-lg leading-tight">
+                        Welcome to
+                        <span className="block text-yellow-300 mt-2">
+                            Noor Public School
+                        </span>
+                    </h1>
+
+                    {/* Counters */}
+                    <div className="mt-4 text-white space-y-3">
+                        <div className="flex items-center gap-3">
+                            <School className="text-yellow-500" />
+                            <span>
+                                <Counter target={1000} />+ Students
+                            </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <GraduationCap className="text-green-500" />
+                            <span>
+                                <Counter target={50} />+ Teachers
+                            </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <Users className="text-blue-500" />
+                            <span>
+                                <Counter target={10} />+ Classes
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
