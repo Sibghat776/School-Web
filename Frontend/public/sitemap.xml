@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home Page -->
+  <url>
+    <loc>https://noorpublicschool.vercel.app/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- About Page -->
+  <url>
+    <loc>https://noorpublicschool.vercel.app/about</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://noorpublicschool.vercel.app/contact</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Admissions Page -->
+  <url>
+    <loc>https://noorpublicschool.vercel.app/admissions</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Gallery Page -->
+  <url>
+    <loc>https://noorpublicschool.vercel.app/gallery</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Facilities Page -->
+  <url>
+    <loc>https://noorpublicschool.vercel.app/*</loc>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
