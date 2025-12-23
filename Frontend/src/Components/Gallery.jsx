@@ -13,6 +13,7 @@ const images = [
     "https://thumbs.dreamstime.com/b/elementary-school-classroom-27014997.jpg",
 ];
 
+
 const Gallery = () => {
     return (
         <>

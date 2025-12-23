@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { School, GraduationCap, Users } from "lucide-react";
 import FounderImg from "../assets/founder.jpeg";
-import img1 from "../assets/Slides/Image 2.jpg";
-import img2 from "../assets/Slides/Image 3.jpg";
-import img3 from "../assets/Slides/Image 5.jpg";
+import img1 from "../assets/Slides/Image 1.jpeg";
+import img2 from "../assets/Slides/Image 2.jpeg";
+import img3 from "../assets/Slides/Image 3.jpeg";
+import img4 from "../assets/Slides/Image 4.jpeg";
+import img5 from "../assets/Slides/Image 5.jpeg";
 
-const images = [img1, img2, img3];
+const images = [img1, img2, img3, img4, img5];
 
 const Counter = ({ target }) => {
     const [count, setCount] = useState(0);
@@ -38,8 +40,8 @@ const Hero = () => {
     }, []);
 
     return (
-        <section className="relative h-screen w-full overflow-hidden bg-[#1d114e]">
-            {/* Slides with smooth zoom + fade */}
+        <section className="relative h-[100vh] w-full overflow-hidden bg-[#1d114e]">
+            {/* Slides */}
             {images.map((img, i) => (
                 <img
                     key={i}
@@ -50,80 +52,88 @@ const Hero = () => {
                 />
             ))}
 
-            {/* Soft Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#234e18]/70 via-[#85bbd7]/30 to-transparent z-10"></div>
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#234e18]/60 via-gray-700/40 to-transparent z-10" />
 
-            {/* Hero Content */}
-            <div className="relative z-20 max-w-7xl mx-auto h-full flex items-center px-6 md:px-16">
-                <div className="max-w-xl space-y-6">
+            {/* Content */}
+            <div className="relative z-20 max-w-6xl mx-auto h-full flex items-center px-6 md:px-14 mt-5">
+                <div className="max-w-lg space-y-5">
 
                     {/* Founder Card */}
-                    <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md p-4 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300">
+                    <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl shadow-lg hover:scale-[1.03] transition">
                         <img
                             src={FounderImg}
                             alt="Founder"
-                            className="w-24 h-24 rounded-full object-cover border-2 border-[#448026] shadow-lg"
+                            className="w-14 h-14 rounded-full object-cover border-2 border-[#448026]"
                         />
                         <div>
-                            <p className="text-white font-semibold text-lg">Mr. Zaka Ullah</p>
-                            <p className="text-[#a8d5ba] text-sm tracking-wide">Founder & Chairman</p>
+                            <p className="text-white font-semibold text-base">
+                                Mr. Zaka Ullah
+                            </p>
+                            <p className="text-[#a8d5ba] text-xs tracking-wide">
+                                Founder & Chairman
+                            </p>
                         </div>
                     </div>
 
                     {/* Heading */}
                     <h1 className="text-white text-4xl md:text-5xl font-bold leading-tight animate-fadeInUp">
                         Shaping Future Through
-                        <span className="block text-[#9ddeff] mt-2">Quality Education</span>
+                        <span className="block text-[#9ddeff] mt-1">
+                            Quality Education
+                        </span>
                     </h1>
 
                     {/* Subtitle */}
-                    <p className="text-[#e6e6e6] text-base md:text-lg leading-relaxed animate-fadeInUp delay-200">
-                        Noor Public School is committed to academic excellence, character building,
-                        and disciplined learning in a safe and inspiring environment.
+                    <p className="text-[#e6e6e6] text-sm md:text-base leading-relaxed animate-fadeInUp delay-200">
+                        Noor Public School is committed to academic excellence,
+                        character building, and disciplined learning in a safe
+                        and inspiring environment.
                     </p>
 
-                    {/* Stats Cards */}
-                    <div className="grid grid-cols-3 sm:grid-cols-3 gap-4 pt-6">
+                    {/* Stats */}
+                    <div className="grid grid-cols-3 gap-3 pt-3">
                         {[
-                            { icon: <School className="mx-auto text-[#125e8a] mb-2 animate-bounce" />, count: 1280, label: "Students" },
-                            { icon: <GraduationCap className="mx-auto text-[#125e8a] mb-2 animate-bounce" />, count: 48, label: "Teachers" },
-                            { icon: <Users className="mx-auto text-[#125e8a] mb-2 animate-bounce" />, count: 10, label: "Classes" },
+                            { icon: <School className="mx-auto text-[#125e8a]" />, count: 1280, label: "Students" },
+                            { icon: <GraduationCap className="mx-auto text-[#125e8a]" />, count: 48, label: "Teachers" },
+                            { icon: <Users className="mx-auto text-[#125e8a]" />, count: 10, label: "Classes" },
                         ].map((stat, idx) => (
                             <div
                                 key={idx}
-                                className="bg-white/10 backdrop-blur-md rounded-2xl p-5 text-center border border-[#ffffff]/10 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
+                                className="bg-white/10 backdrop-blur-md rounded-xl px-2 py-2 text-center border border-white/10 shadow hover:scale-[1.03] transition"
                             >
                                 {stat.icon}
-                                <p className="text-white text-xl font-semibold">
+                                <p className="text-white text-lg font-semibold">
                                     <Counter target={stat.count} />+
                                 </p>
-                                <p className="text-[#d4d4d4] text-sm mt-1">{stat.label}</p>
+                                <p className="text-[#d4d4d4] text-xs">
+                                    {stat.label}
+                                </p>
                             </div>
                         ))}
                     </div>
 
-                    {/* Optional CTA Button */}
-                    <button className="mt-6 bg-[#448026] text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                    {/* CTA */}
+                    <button className="mt-4 bg-[#448026] text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow hover:scale-[1.04] transition">
                         Admission
                     </button>
-
                 </div>
             </div>
 
-            {/* Fade In Animation */}
+            {/* Animations */}
             <style>
                 {`
-          @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(20px);}
-            100% { opacity: 1; transform: translateY(0);}
-          }
-          .animate-fadeInUp {
-            animation: fadeInUp 1s ease-out forwards;
-          }
-          .animate-fadeInUp.delay-200 {
-            animation-delay: 0.2s;
-          }
-        `}
+                @keyframes fadeInUp {
+                    0% { opacity: 0; transform: translateY(18px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fadeInUp {
+                    animation: fadeInUp 0.9s ease-out forwards;
+                }
+                .animate-fadeInUp.delay-200 {
+                    animation-delay: 0.2s;
+                }
+            `}
             </style>
         </section>
     );
