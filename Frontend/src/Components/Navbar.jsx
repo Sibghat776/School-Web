@@ -24,8 +24,10 @@ const Navbar = () => {
     const linkClass = (path) =>
         `px-3 py-2 font-medium text-sm transition-colors duration-200 ${location.pathname === path
             ? "text-blue-300 border-b-2 border-[#418026]"
-            : "text-white hover:text-[#448026]"
-        } ${location.pathname !== "/" ? "text-black" : "text-white"}`;
+            : location.pathname === "/"
+                ? "text-white hover:text-[#448026]"
+                : "text-black hover:text-[#448026]"
+        }`;
 
     return (
         <nav
@@ -35,17 +37,25 @@ const Navbar = () => {
                 }`}
         >
             <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center h-20">
+
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
                     <img src={logo} alt="Logo" className="h-12 w-auto" />
                     <div>
-                        <h1 className={`text-white font-bold text-lg ${location.pathname !== "/" ? "text-black" : "text-white"}`}>NOOR PUBLIC SCHOOL</h1>
-                        <p className="text-[#a8d5ba] text-xs tracking-wide">Knowledge • Discipline • Success</p>
+                        <h1
+                            className={`font-bold text-lg ${location.pathname === "/" ? "text-white" : "text-black"
+                                }${scrolled ? "text-white" : ""}`}
+                        >
+                            NOOR PUBLIC SCHOOL
+                        </h1>
+                        <p className="text-[#a8d5ba] text-xs tracking-wide">
+                            Knowledge • Discipline • Success
+                        </p>
                     </div>
                 </Link>
 
                 {/* Desktop Menu */}
-                <div className={`hidden md:flex items-center gap-8`}>
+                <div className="hidden md:flex items-center gap-8">
                     {navLinks.map((link) => (
                         <Link key={link.name} to={link.path} className={linkClass(link.path)}>
                             {link.name}
@@ -55,19 +65,39 @@ const Navbar = () => {
 
                 {/* Desktop Social */}
                 <div className="hidden md:flex items-center gap-4 ml-6">
-                    <a href="https://www.facebook.com/noorpublicschool" target="_blank" className={`text-white/60 hover:text-[#1877F2] transition ${location.pathname !== "/" ? "text-black" : "text-white"}`}>
+                    <a
+                        href="https://www.facebook.com/noorpublicschool"
+                        target="_blank"
+                        className={`transition ${location.pathname === "/" ? "text-white/60" : "text-black/70"
+                            } hover:text-[#1877F2]`}
+                    >
                         <Facebook size={18} />
                     </a>
-                    <a href="https://www.instagram.com/noor_public_school_karachi/" target="_blank" className={`text-white/60 hover:text-[#D62976] transition ${location.pathname !== "/" ? "text-black" : "text-white"}`}>
+
+                    <a
+                        href="https://www.instagram.com/noor_public_school_karachi/"
+                        target="_blank"
+                        className={`transition ${location.pathname === "/" ? "text-white/60" : "text-black/70"
+                            } hover:text-[#D62976]`}
+                    >
                         <Instagram size={18} />
                     </a>
-                    <a href="https://www.linkedin.com/in/noorpublicschool" target="_blank" className={`text-white/60 hover:text-[#0a66c2] transition ${location.pathname !== "/" ? "text-black" : "text-white"}`}>
+
+                    <a
+                        href="https://www.linkedin.com/in/noorpublicschool"
+                        target="_blank"
+                        className={`transition ${location.pathname === "/" ? "text-white/60" : "text-black/70"
+                            } hover:text-[#0a66c2]`}
+                    >
                         <Linkedin size={18} />
                     </a>
                 </div>
 
                 {/* Mobile Menu Button */}
-                <button onClick={() => setOpen(!open)} className="md:hidden text-white">
+                <button
+                    onClick={() => setOpen(!open)}
+                    className={location.pathname === "/" ? "text-white" : "text-black md:hidden"}
+                >
                     {open ? <X size={26} /> : <Menu size={26} />}
                 </button>
             </div>
@@ -87,15 +117,10 @@ const Navbar = () => {
                     ))}
 
                     <div className="flex gap-5 pt-4 border-t border-[#448026]/30">
-                        <a href="https://www.facebook.com/noorpublicschool" target="_blank" className={`text-white/60 hover:text-[#1877F2] transition ${location.pathname !== "/" ? "text-black" : "text-white"}`}>
-                            <Facebook size={18} />
-                        </a>
-                        <a href="https://www.instagram.com/noor_public_school_karachi/" target="_blank" className={`text-white/60 hover:text-[#D62976] transition ${location.pathname !== "/" ? "text-black" : "text-white"}`}>
-                            <Instagram size={18} />
-                        </a>
-                        <a href="https://www.linkedin.com/in/noorpublicschool" target="_blank" className={`text-white/60 hover:text-[#0a66c2] transition ${location.pathname !== "/" ? "text-black" : "text-white"}`}>
-                            <Linkedin size={18} />
-                        </a></div>
+                        <Facebook className="text-white/60 hover:text-[#1877F2]" size={18} />
+                        <Instagram className="text-white/60 hover:text-[#D62976]" size={18} />
+                        <Linkedin className="text-white/60 hover:text-[#0a66c2]" size={18} />
+                    </div>
                 </div>
             )}
         </nav>
