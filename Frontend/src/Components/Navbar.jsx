@@ -92,7 +92,6 @@ const Navbar = () => {
                         <Linkedin size={18} />
                     </a>
                 </div>
-
                 {/* Mobile Menu Button */}
                 <button
                     onClick={() => setOpen(!open)}
