@@ -18,7 +18,7 @@ const Gallery = () => {
     return (
         <>
             <Navbar />
-            <section className="bg-[#f4f7f8] py-16 px-6 lg:px-20">
+            <section className="bg-[#f4f7f8] py-28 px-6 lg:px-20">
                 <div className="max-w-7xl mx-auto text-center">
                     <h2 className="text-4xl font-bold text-[#1d1449] mb-4">School Gallery</h2>
                     <p className="text-gray-600 mb-12">A glimpse into student life at Noor Public School</p>

@@ -9,7 +9,7 @@ const Admission = () => {
     return (
         <>
             <Navbar />
-            <div className="bg-[#dee9ee] min-h-fit py-20 px-4 md:px-16">
+            <div className="bg-[#dee9ee] min-h-fit py-28 px-4 md:px-16">
                 <div className="max-w-5xl mx-auto">
                     <h1 className="text-4xl font-bold text-center text-[#1d1449] mb-4">Admissions at Noor Public School</h1>
                     <p className="text-center text-gray-700 text-lg mb-10">

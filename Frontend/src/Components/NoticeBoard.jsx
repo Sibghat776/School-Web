@@ -9,25 +9,25 @@ import {
 const notices = [
     {
         title: "New Admissions Open",
-        description: "Admissions for classes KG to Grade 10 are now open.",
+        description: "Admissions for classes KG to Grade 10 are open in April 2026.",
         icon: Megaphone,
         gradient: "from-[#2E3192] to-[#1BFFFF]",
     },
     {
         title: "Holiday Notice",
-        description: "School will remain closed on 14th August for Independence Day.",
+        description: "School will remain closed on tomorrow 2nd January for Saturday.",
         icon: CalendarDays,
         gradient: "from-[#8E2DE2] to-[#4A00E0]",
     },
     {
-        title: "Exam Schedule Released",
-        description: "Mid-term exam schedule is uploaded on the student portal.",
+        title: "Final Term Exams",
+        description: "Final Term Examination schedule will be uploaded soon on our official Website.",
         icon: AlertTriangle,
         gradient: "from-[#0BA360] to-[#3CBA92]",
     },
     {
-        title: "Parent-Teacher Meeting",
-        description: "PTM will be held on 20th August in the school auditorium.",
+        title: "________________",
+        description: "_______________.",
         icon: Info,
         gradient: "from-[#f7971e] to-[#ffd200]",
     },

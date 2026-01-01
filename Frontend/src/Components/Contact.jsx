@@ -27,7 +27,7 @@ const Contact = () => {
     return (
         <>
             <Navbar />
-            <section className="min-h-fit bg-gradient-to-br from-[#e8f3f1] via-white to-[#dbece2] py-28 px-6">
+            <section className="min-h-fit bg-gradient-to-br from-[#e8f3f1] via-white to-[#dbece2] py-36 px-6">
                 <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
 
                     {/* Left Column */}
