@@ -38,7 +38,6 @@ const Hero = () => {
         }, 5000);
         return () => clearInterval(slider);
     }, []);
-
     return (
         <section className="relative h-[100vh] w-full overflow-hidden bg-[#1d114e]">
             {/* Slides */}
@@ -114,8 +113,11 @@ const Hero = () => {
                     </div>
 
                     {/* CTA */}
-                    <button className="mt-4 bg-[#448026] text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow hover:scale-[1.04] transition">
-                        Admission
+                    <button onClick={() => {
+                        console.log("Hello from registration button")
+                        window.location.href = "/registration";
+                    }} className="mt-4 bg-[#448026] text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow hover:scale-[1.04] transition">
+                        Register Now
                     </button>
                 </div>
             </div>

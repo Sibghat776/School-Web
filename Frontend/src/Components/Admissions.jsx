@@ -64,7 +64,7 @@ const Admission = () => {
                         </div>
                     </div>
                     <div className="text-center mt-10">
-                        <a href={AdmissionForm} className='bg-black text-white px-6 py-3 shadow-lg hover:bg-gray-800 rounded' >Admission Form</a>
+                        <a href={AdmissionForm} className='bg-black text-white px-6 py-3 shadow-lg hover:bg-gray-800 rounded' >Register Now</a>
                     </div>
                     <div className="text-center mt-12">
                         <p className="text-lg text-gray-800">
@@ -75,21 +75,21 @@ const Admission = () => {
                             {getWhatsappLink("03152779033", true) ? ( // <-- yaha condition laga do ke kya yeh number WhatsApp pe hai?
                                 <>
                                     Campus I : <a
+                                        href="https://wa.me/923152779033"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-green-600 hover:underline"
+                                    >
+                                        0315 2779033 
+                                    </a>
+                                    &nbsp;or&nbsp;
+                                    Campus II : <a
                                         href="https://wa.me/923172108821"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-green-600 hover:underline"
                                     >
                                         0317 2108821
-                                    </a>
-                                    &nbsp;or&nbsp;
-                                    Campus II : <a
-                                        href="https://wa.me/923152779033"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-green-600 hover:underline"
-                                    >
-                                        0315 2779033
                                     </a>
                                 </>
                             ) : (

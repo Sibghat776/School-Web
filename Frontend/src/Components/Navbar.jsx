@@ -7,6 +7,9 @@ const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behaviour: "smooth" })
+    }
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -69,6 +72,7 @@ const Navbar = () => {
                         <Link
                             key={link.name}
                             to={link.path}
+                            onClick={scrollToTop}
                             className={linkClass(link.path)}
                         >
                             {link.name}
@@ -81,7 +85,7 @@ const Navbar = () => {
                     <a
                         href="https://www.facebook.com/noorpublicschool"
                         target="_blank"
-                        className={`transition ${location.pathname === "/"
+                        className={`transition ${location.pathname === "/" || scrolled
                             ? "text-white/60"
                             : "text-black/70"
                             } hover:text-[#1877F2]`}
@@ -92,7 +96,7 @@ const Navbar = () => {
                     <a
                         href="https://www.instagram.com/noor_public_school_karachi/"
                         target="_blank"
-                        className={`transition ${location.pathname === "/"
+                        className={`transition ${location.pathname === "/" || scrolled
                             ? "text-white/60"
                             : "text-black/70"
                             } hover:text-[#D62976]`}
@@ -103,7 +107,7 @@ const Navbar = () => {
                     <a
                         href="https://www.linkedin.com/in/noorpublicschool"
                         target="_blank"
-                        className={`transition ${location.pathname === "/"
+                        className={`transition ${location.pathname === "/" || scrolled
                             ? "text-white/60"
                             : "text-black/70"
                             } hover:text-[#0a66c2]`}
