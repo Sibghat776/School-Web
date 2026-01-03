@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 let { Schema } = mongoose
 
-let UserSchema = new mongoose.Schema({
+let MessagesSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -21,5 +21,4 @@ let UserSchema = new mongoose.Schema({
     }
 )
 
-
-export default mongoose.model("User", UserSchema)
+export default mongoose.model("Messages", MessagesSchema)
