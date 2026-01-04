@@ -1,38 +1,22 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
-    User,
-    Users,
-    Calendar,
-    MapPin,
-    Phone,
-    School,
-    ShieldCheck,
-    Printer,
-    Download,
-    CheckCircle2,
-    Trash2,
-    BookOpen
+    User, Users, Calendar, MapPin, Phone, School, ShieldCheck,
+    Printer, Trash2, BookOpen, CreditCard, Briefcase, Banknote, CheckCircle2
 } from "lucide-react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { showToast } from "../utils/commonFunctions";
 
 const Registration = () => {
     const [submitted, setSubmitted] = useState(false);
     const [formData, setFormData] = useState({
-        studentName: "",
-        fatherName: "",
-        motherName: "",
-        dob: "",
-        religion: "Islam",
-        gender: "Male",
-        cast: "",
-        address: "",
-        city: "",
-        contact: "",
-        lastSchool: "",
+        studentName: "", fatherName: "", motherName: "", dob: "",
+        religion: "", gender: "", cast: "", address: "",
+        city: "", contact: "", lastSchool: "", stdBForm: "",
+        fatherCnic: "", fatherContact: "", fatherOccupation: "", fatherIncome: ""
     });
-
+    
     const formNo = "ADM-" + Math.floor(1000 + Math.random() * 9000);
     const regDate = new Date().toLocaleDateString("en-GB");
 
@@ -41,186 +25,205 @@ const Registration = () => {
     };
 
     const handleSubmit = (e) => {
+        formData == "" && showToast("Form data is missing!", "error");
         e.preventDefault();
         setSubmitted(true);
+        showToast("Admission form submitted successfully!", "success");
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const handlePrint = () => {
-        window.print();
-    };
+    const handlePrint = () => { window.print(); };
+
+    // Common Input Style for Compactness
+    const inputStyle = "w-full px-3 py-1.5 rounded-lg border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all bg-slate-50/50 text-sm";
+    const labelStyle = "text-[11px] font-bold text-slate-600 uppercase tracking-tight flex items-center gap-1 mb-0.5";
 
     return (
         <>
             <Navbar />
-            <div className="min-h-screen md:py-24 bg-slate-50 p-4 md:p-10 font-sans">
-                {/* Header Section */}
-                <div className="max-w-4xl mx-auto text-center mb-10 print:hidden">
-                    <h1 className="text-4xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <div className="min-h-screen bg-[#f8fafc] p-3 md:p-6 font-sans">
+                {/* Header - Compact */}
+                <div className="max-w-4xl mx-auto text-center mb-4 print:hidden pt-16 md:pt-20">
+                    <h1 className="text-3xl font-black bg-gradient-to-r from-slate-800 to-indigo-900 bg-clip-text text-transparent tracking-tight">
                         NPS ADMISSION PORTAL
                     </h1>
-                    <p className="text-gray-500 mt-2 italic">Experience the Online Student Registration System</p>
+                    <p className="text-xs text-slate-500 font-medium">VIP Digital Enrollment System</p>
                 </div>
 
-                <div className="max-w-5xl mx-auto">
+                <div className="max-w-4xl mx-auto">
                     {!submitted ? (
-                        /* --- 1. REGISTRATION FORM --- */
-                        <div className="bg-white rounded-3xl shadow-2xl border border-indigo-50 overflow-hidden transform transition-all hover:shadow-indigo-100">
-                            <div className="bg-gradient-to-r from-indigo-600 to-blue-500 p-6 flex items-center gap-3">
-                                <User className="text-white" size={28} />
-                                <h2 className="text-xl font-bold text-white uppercase tracking-wider">New Student Registration</h2>
+                        <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+                            <div className="bg-slate-900 p-3 flex items-center justify-between">
+                                <div className="flex items-center gap-2 text-white">
+                                    <User size={18} className="text-indigo-400" />
+                                    <span className="text-sm font-bold uppercase tracking-widest">New Admission Form</span>
+                                </div>
+                                <span className="text-[10px] text-slate-400 font-mono">FORM ID: {formNo}</span>
                             </div>
 
-                            <form onSubmit={handleSubmit} className="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {/* Field Groups */}
-                                {[
-                                    { label: "Student Full Name", name: "studentName", icon: <User size={18} />, type: "text", required: true },
-                                    { label: "Father's Name", name: "fatherName", icon: <Users size={18} />, type: "text", required: true },
-                                    { label: "Mother's Name", name: "motherName", icon: <Users size={18} />, type: "text", required: true },
-                                    { label: "Date of Birth", name: "dob", icon: <Calendar size={18} />, type: "date", required: true },
-                                    { label: "Cast / Community", name: "cast", icon: <ShieldCheck size={18} />, type: "text" },
-                                    { label: "City", name: "city", icon: <MapPin size={18} />, type: "text", required: true },
-                                    { label: "Contact Number", name: "contact", icon: <Phone size={18} />, type: "tel", required: true },
-                                    { label: "Last School Attended", name: "lastSchool", icon: <School size={18} />, type: "text" },
-                                ].map((field) => (
-                                    <div key={field.name} className="flex flex-col gap-1.5">
-                                        <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                                            {field.icon} {field.label}
-                                        </label>
-                                        <input
-                                            required={field.required}
-                                            type={field.type}
-                                            name={field.name}
-                                            onChange={handleChange}
-                                            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition-all bg-gray-50/50"
-                                        />
+                            <form onSubmit={handleSubmit} className="p-5">
+                                {/* Section 1: Student Details */}
+                                <div className="mb-4">
+                                    <h3 className="text-xs font-black text-indigo-600 mb-3 border-b border-indigo-50 pb-1 flex items-center gap-2">
+                                        <User size={14} /> STUDENT INFORMATION
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-3">
+                                        <div>
+                                            <label className={labelStyle}>Student Full Name</label>
+                                            <input required name="studentName" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>Date of Birth</label>
+                                            <input required type="date" name="dob" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>Std B-Form # <span className="text-blue-500 font-normal">(Optional)</span></label>
+                                            <input name="stdBForm" onChange={handleChange} className={inputStyle} placeholder="xxxxx-xxxxxxx-x" />
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>Gender / Religion</label>
+                                            <div className="flex gap-2">
+                                                <select name="gender" onChange={handleChange} className={inputStyle}>
+                                                    <option>Male</option><option>Female</option>
+                                                </select>
+                                                <select name="religion" onChange={handleChange} className={inputStyle}>
+                                                    <option>Islam</option><option>Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>Cast / Community</label>
+                                            <input name="cast" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>Last School <span className="text-blue-500 font-normal">(Optional)</span></label>
+                                            <input name="lastSchool" onChange={handleChange} className={inputStyle} />
+                                        </div>
                                     </div>
-                                ))}
-
-                                <div className="flex flex-col gap-1.5">
-                                    <label className="text-sm font-semibold text-gray-700">Religion</label>
-                                    <select name="religion" onChange={handleChange} className="px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50/50 outline-none">
-                                        <option value="Islam">Islam</option>
-                                        <option value="Christianity">Christianity</option>
-                                        <option value="Hinduism">Hinduism</option>
-                                        <option value="Other">Other</option>
-                                    </select>
                                 </div>
 
-                                <div className="flex flex-col gap-1.5">
-                                    <label className="text-sm font-semibold text-gray-700">Gender</label>
-                                    <select name="gender" onChange={handleChange} className="px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50/50 outline-none">
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Other">Other</option>
-                                    </select>
+                                {/* Section 2: Father/Guardian Details */}
+                                <div className="mb-4">
+                                    <h3 className="text-xs font-black text-indigo-600 mb-3 border-b border-indigo-50 pb-1 flex items-center gap-2">
+                                        <Users size={14} /> FATHER / GUARDIAN INFORMATION
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-3">
+                                        <div>
+                                            <label className={labelStyle}>Father's Name</label>
+                                            <input required name="fatherName" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>Father CNIC #</label>
+                                            <input required name="fatherCnic" onChange={handleChange} className={inputStyle} placeholder="42xxx-xxxxxxx-x" />
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>Father Cell #</label>
+                                            <input required name="fatherContact" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>Occupation</label>
+                                            <input required name="fatherOccupation" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>Monthly Income <span className="text-blue-500 font-normal">(Optional)</span></label>
+                                            <input name="fatherIncome" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>Mother's Name</label>
+                                            <input required name="motherName" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div className="md:col-span-2 flex flex-col gap-1.5">
-                                    <label className="text-sm font-semibold text-gray-700 flex items-center gap-2"><MapPin size={18} /> Current Address</label>
-                                    <input name="address" onChange={handleChange} className="px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50/50 outline-none" required />
+                                {/* Section 3: Address */}
+                                <div>
+                                    <h3 className="text-xs font-black text-indigo-600 mb-3 border-b border-indigo-50 pb-1 flex items-center gap-2">
+                                        <MapPin size={14} /> RESIDENTIAL ADDRESS
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                        <div className="md:col-span-3">
+                                            <label className={labelStyle}>Current Address</label>
+                                            <input required name="address" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                        <div>
+                                            <label className={labelStyle}>City</label>
+                                            <input required name="city" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div className="md:col-span-2 mt-4">
-                                    <button type="submit" className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-indigo-200 hover:scale-[1.01] transition-all flex items-center justify-center gap-2 uppercase tracking-widest">
-                                        <CheckCircle2 size={22} /> Generate Admission Sheet
-                                    </button>
-                                </div>
+                                <button type="submit" className="w-full mt-6 bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-widest shadow-lg shadow-slate-200">
+                                    <CheckCircle2 size={18} /> Finalize & Generate Sheet
+                                </button>
                             </form>
                         </div>
                     ) : (
-                        /* --- 2. PROFESSIONAL ADMISSION SHEET (Output) --- */
-                        <div className="animate-in fade-in zoom-in duration-500">
-                            {/* Control Buttons - Hidden during print */}
-                            <div className="flex gap-4 mb-6 print:hidden">
-                                <button onClick={() => setSubmitted(false)} className="flex items-center gap-2 px-6 py-2 bg-white border border-red-200 text-red-600 rounded-full font-medium hover:bg-red-50 transition">
-                                    <Trash2 size={18} /> Reset Form
+                        /* --- 2. ADMISSION SHEET (Fits on Screen) --- */
+                        <div className="animate-in fade-in duration-500 scale-95 md:scale-100">
+                            <div className="flex gap-2 mb-4 print:hidden">
+                                <button onClick={() => setSubmitted(false)} className="px-4 py-1.5 text-xs bg-white border border-slate-200 text-slate-600 rounded-lg font-bold flex items-center gap-1 hover:bg-slate-50">
+                                    <Trash2 size={14} /> EDIT
                                 </button>
-                                <button onClick={handlePrint} className="flex items-center gap-2 px-6 py-2 bg-indigo-600 text-white rounded-full font-medium shadow-lg hover:bg-indigo-700 transition ml-auto">
-                                    <Printer size={18} /> Print Sheet
+                                <button onClick={handlePrint} className="px-6 py-1.5 text-xs bg-slate-900 text-white rounded-lg font-bold flex items-center gap-1 ml-auto hover:bg-slate-800 shadow-md">
+                                    <Printer size={14} /> PRINT ADMISSION COPY
                                 </button>
                             </div>
 
-                            {/* THE SHEET */}
-                            <div className="bg-white p-10 shadow-2xl rounded-sm border-[10px] border-double border-gray-100 relative print:shadow-none print:border-none print:p-0">
-                                {/* Decorative Corner */}
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -z-0 opacity-50 print:hidden"></div>
-
-                                {/* School Header */}
-                                <div className="border-b-4 border-indigo-600 pb-6 mb-8 flex justify-between items-end relative z-10">
+                            <div className="bg-white p-6 shadow-2xl rounded-sm border-[6px] border-double border-slate-200 relative print:shadow-none print:border-slate-800">
+                                {/* Header Compact */}
+                                <div className="border-b-2 border-slate-800 pb-3 mb-4 flex justify-between items-center">
                                     <div>
-                                        <h2 className="text-4xl font-black text-indigo-900 tracking-tighter">NOOR PUBLIC SCHOOL</h2>
-                                        <p className="text-sm text-gray-600 font-medium">Quality Education • Professional Excellence • Innovation</p>
-                                        <p className="text-xs text-gray-400 mt-1 uppercase">Ghazi Nagar, Siddique Wahab Road, Street # 20, Usmanabad, Garden West, Karachi, Pakistan</p>
+                                        <h2 className="text-2xl font-black text-slate-900 leading-tight tracking-tighter">NOOR PUBLIC SCHOOL</h2>
+                                        <p className="text-[9px] text-slate-500 font-bold uppercase tracking-tighter">Ghazi Nagar, Usmanabad, Garden West, Karachi</p>
                                     </div>
-                                    <div className="text-right">
-                                        <div className="inline-block bg-indigo-600 text-white px-4 py-1 rounded-md text-sm font-bold mb-1">OFFICIAL ADMISSION COPY</div>
-                                        <p className="text-sm font-bold text-gray-700">Form No: {formNo}</p>
-                                        <p className="text-xs text-gray-500 italic">Dated: {regDate}</p>
+                                    <div className="text-right border-l pl-4 border-slate-100">
+                                        <p className="text-[10px] font-black text-white bg-slate-900 px-2 py-0.5 rounded">FORM: {formNo}</p>
+                                        <p className="text-[9px] font-bold text-slate-500 mt-1 uppercase">Date: {regDate}</p>
                                     </div>
                                 </div>
 
-                                {/* Student Photo Placeholder */}
-                                <div className="absolute right-10 top-40 w-32 h-40 border-2 border-dashed border-gray-300 flex items-center justify-center text-center p-4 text-xs text-gray-400 print:border-solid">
-                                    Affix Recent Passport Size Photograph
-                                </div>
-
-                                {/* Data Grid */}
-                                <div className="grid grid-cols-1 gap-y-4 max-w-[70%]">
+                                {/* Content Grid - 2 Column for Sheet */}
+                                <div className="grid grid-cols-2 gap-x-8 gap-y-2.5">
                                     {[
-                                        { label: "STUDENT NAME", value: formData.studentName },
-                                        { label: "FATHER'S NAME", value: formData.fatherName },
-                                        { label: "MOTHER'S NAME", value: formData.motherName },
-                                        { label: "DATE OF BIRTH", value: formData.dob },
-                                        { label: "RELIGION / GENDER", value: `${formData.religion} / ${formData.gender}` },
-                                        { label: "CAST / COMMUNITY", value: formData.cast || "N/A" },
-                                        { label: "CONTACT NUMBER", value: formData.contact },
-                                        { label: "LAST SCHOOL", value: formData.lastSchool || "N/A" },
+                                        { l: "Student Name", v: formData.studentName },
+                                        { l: "B-Form #", v: formData.stdBForm || "Not Provided" },
+                                        { l: "Father's Name", v: formData.fatherName },
+                                        { l: "Father CNIC", v: formData.fatherCnic },
+                                        { l: "Father Contact", v: formData.fatherContact },
+                                        { l: "Occupation", v: formData.fatherOccupation },
+                                        { l: "Income", v: formData.fatherIncome || "N/A" },
+                                        { l: "Date of Birth", v: formData.dob },
+                                        { l: "Religion/Gender", v: `${formData.religion} / ${formData.gender}` },
+                                        { l: "Last School", v: formData.lastSchool || "N/A" },
                                     ].map((item, idx) => (
-                                        <div key={idx} className="flex items-baseline gap-4">
-                                            <span className="text-xs font-black text-indigo-800 w-36 shrink-0 tracking-widest uppercase">{item.label}:</span>
-                                            <span className="text-lg font-medium text-gray-800 border-b border-gray-200 grow uppercase">{item.value}</span>
+                                        <div key={idx} className="flex flex-col border-b border-slate-200">
+                                            <span className="text-[9px] font-black text-indigo-900 uppercase tracking-widest">{item.l}</span>
+                                            <span className="text-sm font-bold text-slate-800 uppercase">{item.v}</span>
                                         </div>
                                     ))}
-                                </div>
-
-                                {/* Address Section */}
-                                <div className="mt-8">
-                                    <p className="text-xs font-black text-indigo-800 tracking-widest uppercase mb-1">Residential Address:</p>
-                                    <p className="text-lg border-b border-gray-200 pb-1 text-gray-800 uppercase">{formData.address}, {formData.city}</p>
-                                </div>
-
-                                {/* Rules & Regulations */}
-                                <div className="mt-12 bg-gray-50 p-6 rounded-lg border border-gray-100">
-                                    <h4 className="text-sm font-bold text-indigo-900 flex items-center gap-2 mb-3">
-                                        <BookOpen size={16} /> SCHOOL RULES & DECLARATION
-                                    </h4>
-                                    <ul className="text-[10px] text-gray-600 space-y-1 list-disc ml-4">
-                                        <li>Attendance must be maintained above 85% in all academic sessions.</li>
-                                        <li>School uniform and discipline are mandatory at all times.</li>
-                                        <li>Fee must be cleared by the 10th of every month.</li>
-                                        <li>I hereby declare that all information provided above is correct to the best of my knowledge.</li>
-                                    </ul>
-                                </div>
-
-                                {/* Signature Area */}
-                                <div className="mt-20 flex justify-between px-10">
-                                    <div className="text-center w-48">
-                                        <div className="border-t-2 border-gray-800 mb-2"></div>
-                                        <p className="text-xs font-bold text-gray-800 uppercase">Parent/Guardian Signature</p>
-                                    </div>
-                                    <div className="text-center w-48">
-                                        <div className="border-t-2 border-gray-800 mb-2"></div>
-                                        <p className="text-xs font-bold text-gray-800 uppercase">Principal's Seal & Sign</p>
+                                    <div className="col-span-2 flex flex-col border-b border-slate-200">
+                                        <span className="text-[9px] font-black text-indigo-900 uppercase tracking-widest">Residential Address</span>
+                                        <span className="text-sm font-bold text-slate-800 uppercase">{formData.address}, {formData.city}</span>
                                     </div>
                                 </div>
 
-                                {/* Footer */}
-                                <div className="mt-12 pt-4 border-t border-gray-100 text-center">
-                                    <p className="text-[10px] text-gray-400 tracking-[0.2em] uppercase italic">
-                                        This is a computer generated admission sheet authorized by Noor Public School Education System.
-                                    </p>
+                                {/* Photo box - absolute */}
+                                <div className="absolute top-24 right-6 w-24 h-28 border border-slate-300 flex items-center justify-center text-[8px] text-slate-400 text-center px-2 print:border-slate-800">
+                                    STUDENT PHOTO
                                 </div>
+
+                                <div className="mt-6 flex justify-between pt-10 px-4">
+                                    <div className="text-center w-32 border-t border-slate-800 pt-1">
+                                        <p className="text-[9px] font-bold uppercase">Guardian Sign</p>
+                                    </div>
+                                    <div className="text-center w-32 border-t border-slate-800 pt-1">
+                                        <p className="text-[9px] font-bold uppercase">Principal Sign</p>
+                                    </div>
+                                </div>
+
+                                <p className="mt-6 text-center text-[8px] text-slate-400 italic tracking-[0.2em] uppercase border-t pt-2">
+                                    NPS Official Computer Generated Document
+                                </p>
                             </div>
                         </div>
                     )}
