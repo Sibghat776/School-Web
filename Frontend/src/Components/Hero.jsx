@@ -6,6 +6,7 @@ import img2 from "../assets/Slides/Image 2.jpeg";
 import img3 from "../assets/Slides/Image 3.jpeg";
 import img4 from "../assets/Slides/Image 4.jpeg";
 import img5 from "../assets/Slides/Image 5.jpeg";
+import { Link } from "react-router-dom";
 
 const images = [img1, img2, img3, img4, img5];
 
@@ -99,7 +100,7 @@ const Hero = () => {
                         ].map((stat, idx) => (
                             <div
                                 key={idx}
-                                className="bg-white/10 backdrop-blur-md rounded-xl px-2 py-2 text-center border border-white/10 shadow hover:scale-[1.03] transition"
+                                className="bg-white/10 backdrop-blur-md rounded-xl px-2 py-2 mb-9 text-center border border-white/10 shadow hover:scale-[1.03] transition"
                             >
                                 {stat.icon}
                                 <p className="text-white text-lg font-semibold">
@@ -113,12 +114,9 @@ const Hero = () => {
                     </div>
 
                     {/* CTA */}
-                    <button onClick={() => {
-                        console.log("Hello from registration button")
-                        window.location.href = "/registration";
-                    }} className="mt-4 bg-[#448026] text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow hover:scale-[1.04] transition">
+                    <Link to="/registration" className="bg-[#448026] text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow hover:scale-[1.04] transition">
                         Register Now
-                    </button>
+                    </Link>
                 </div>
             </div>
 

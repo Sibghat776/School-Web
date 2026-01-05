@@ -129,23 +129,25 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu (ONLY MOBILE) */}
-            {open && (
-                <div className="md:hidden bg-[#1d114e]/95 backdrop-blur-md shadow-xl border-t border-[#448026]/30 px-6 pt-4 pb-6 space-y-4 rounded-b-2xl">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            to={link.path}
-                            onClick={() => setOpen(false)}
-                            className="block text-white hover:text-[#85bbd7] font-medium transition"
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
+            {(open || window.scroll === null) && (
+                <div className="bg-black/50 z-10 h-screen transition-opacity " onClick={() => setOpen(false)}>
+                    <div className="md:hidden bg-[#1d114e]/95 backdrop-blur-md shadow-xl border-t border-[#448026]/30 px-6 pt-4 pb-6 space-y-4 rounded-b-2xl">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                to={link.path}
+                                onClick={() => setOpen(false)}
+                                className="block text-white hover:text-[#85bbd7] font-medium transition"
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
 
-                    <div className="flex gap-5 pt-4 border-t border-[#448026]/30">
-                        <Facebook className="text-white/60 hover:text-[#1877F2]" size={18} />
-                        <Instagram className="text-white/60 hover:text-[#D62976]" size={18} />
-                        <Linkedin className="text-white/60 hover:text-[#0a66c2]" size={18} />
+                        <div className="flex gap-5 pt-4 border-t border-[#448026]/30">
+                            <Facebook className="text-white/60 hover:text-[#1877F2]" size={18} />
+                            <Instagram className="text-white/60 hover:text-[#D62976]" size={18} />
+                            <Linkedin className="text-white/60 hover:text-[#0a66c2]" size={18} />
+                        </div>
                     </div>
                 </div>
             )}
