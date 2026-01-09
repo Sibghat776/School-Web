@@ -1,10 +1,10 @@
-import express from "express"
+    import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import helmet from "helmet"
 import { contactRoute } from "./Routes/contactRoute.js"
 import { connectDB } from "./utils/commonFunctions.js"
-import { galleryRouter } from "./Routes/gallery.js"
+import { galleryRouter } from "./Routes/galleryRoute.js"
 
 dotenv.config()
 
