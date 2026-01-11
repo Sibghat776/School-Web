@@ -1,7 +1,6 @@
 import multer from "multer";
 import path from "path";
 
-// Destination: Temporary storage in 'uploads/' folder
 const storage = multer.memoryStorage();
 
 // File type filter: Only images allowed

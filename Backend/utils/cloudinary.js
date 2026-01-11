@@ -1,6 +1,5 @@
-import { v2 as cloudinary } from 'cloudinary';
-import dotenv from 'dotenv';
-import fs from 'fs';
+import { v2 as cloudinary } from "cloudinary";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -10,33 +9,21 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-export const uploadToCloudinary = async (filePath, folderName = 'uploads') => {
-    try {
-        console.log(filePath, folderName);
-        const result = await cloudinary.uploader.upload(filePath, {
-            folder: folderName,
-            resource_type: 'auto' // Automatically detect the resource type (image, video, etc.)
-        });
-
-        fs.unlink(filePath, (err) => {      
-            if (err) console.error("Error deleting temp file:", err);
-            console.log("Deleting image from temp folder");
-        })
-
-        console.log(result, "result");
-        return result;
-    } catch (error) {
-        throw new Error("Cloudinary Upload Failed: " + error.message);
-    }
+export const uploadToCloudinary = (buffer, folder = "school-gallery") => {
+    return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+            { folder },
+            (error, result) => {
+                if (error) reject(error);
+                else resolve(result);
+            }
+        );
+        stream.end(buffer);
+    });
 };
-    
+
 export const deleteFromCloudinary = async (publicId) => {
-    try {
-        const result = await cloudinary.uploader.destroy(publicId);
-        return result;
-    } catch (error) {
-        throw new Error("Cloudinary Deletion Failed: " + error.message);
-    }
+    return cloudinary.uploader.destroy(publicId);
 };
 
 export default cloudinary;
