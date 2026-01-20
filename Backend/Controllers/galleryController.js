@@ -4,6 +4,9 @@ import { createError, createSuccess } from "../utils/commonFunctions.js";
 
 export let addPost = async (req, res, next) => {
     try {
+        if(!req.body) 
+            return next(createError(401, "Please fill all fields"));
+
         const { teacherName, title } = req.body;
 
         if (!teacherName || !title)
