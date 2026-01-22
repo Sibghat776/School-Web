@@ -4,13 +4,16 @@ import { createError, createSuccess } from "../utils/commonFunctions.js";
 
 export let addPost = async (req, res, next) => {
     try {
-        if(!req.body) 
+        if (!req.body)
             return next(createError(401, "Please fill all fields"));
 
         const { teacherName, title } = req.body;
 
         if (!teacherName || !title)
             return next(createError(400, "Please fill all fields"));
+
+        if (!teacherName)
+            return next(createError(400, "Password is required"));
 
         if (teacherName !== "Sibghat Ullah")
             return next(createError(403, "You are not authorized"));
@@ -41,3 +44,13 @@ export let addPost = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getPosts = async (req, res, next) => {
+    try {
+        const posts = await Gallery.find().sort({ createdAt: -1 });
+        const data = createSuccess(200, "Posts Fetched Successfully!", posts)
+        res.json(data)
+    } catch (error) {
+        return next(error);
+    }
+}

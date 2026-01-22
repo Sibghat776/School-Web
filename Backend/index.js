@@ -5,6 +5,7 @@ import helmet from "helmet"
 import { contactRoute } from "./Routes/contactRoute.js"
 import { connectDB } from "./utils/commonFunctions.js"
 import { galleryRouter } from "./Routes/galleryRoute.js"
+import { registrationRouter } from "./Routes/registrationRoute.js"
 
 dotenv.config()
 
@@ -34,6 +35,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 app.use("/api/contact", contactRoute)
 app.use("/api/gallery", galleryRouter)
+app.use("/api/registration", registrationRouter)
 
 
 app.use((err, req, res, next) => {
