@@ -48,6 +48,10 @@ let RegistrationSchema = new mongoose.Schema({
         type: Number,
         Optional: true
     },
+    Email:{
+        type: String,
+        Optional: true
+    },
     MotherName: {
         type: String,
         required: true

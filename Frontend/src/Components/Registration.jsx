@@ -2,7 +2,9 @@
 import React, { useState } from "react";
 import {
     User, Users, Calendar, MapPin, Phone, School, ShieldCheck,
-    Printer, Trash2, BookOpen, CreditCard, Briefcase, Banknote, CheckCircle2
+    Printer, Trash2, BookOpen, CreditCard, Briefcase, Banknote, CheckCircle2,
+    CastleIcon,
+    Castle
 } from "lucide-react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -35,8 +37,8 @@ const Registration = () => {
     const handlePrint = () => { window.print(); };
 
     // Common Input Style for Compactness
-    const inputStyle = "w-full px-3 py-1.5 rounded-lg border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all bg-slate-50/50 text-sm";
-    const labelStyle = "text-[11px] font-bold text-slate-600 uppercase tracking-tight flex items-center gap-1 mb-0.5";
+    const inputStyle = "w-full px-3 py-1.5 rounded-lg border border-slate-400 focus:ring-2 focus:ring-indigo-500 outline-none transition-all bg-slate-50/50 text-sm";
+    const labelStyle = "text-[11px] font-bold text-slate-600 uppercase tracking-tight flex items-center gap-2 mb-0.5";
 
     return (
         <>
@@ -129,6 +131,10 @@ const Registration = () => {
                                             <input name="fatherIncome" onChange={handleChange} className={inputStyle} />
                                         </div>
                                         <div>
+                                            <label className={labelStyle}>Email</label>
+                                            <input required name="Email" onChange={handleChange} className={inputStyle} />
+                                        </div>
+                                        <div>
                                             <label className={labelStyle}>Mother's Name</label>
                                             <input required name="motherName" onChange={handleChange} className={inputStyle} />
                                         </div>
@@ -136,6 +142,49 @@ const Registration = () => {
                                 </div>
 
                                 {/* Section 3: Address */}
+                                <div>
+                                    <h3 className="text-xs font-black text-indigo-600 mb-3 border-b border-indigo-50 pb-1 flex items-center gap-2">
+                                        <Castle size={14} /> CLASS
+                                    </h3>
+                                    <div className="grid mb-3 grid-cols-1 md:grid-cols-4 gap-4">
+                                        <div className="md:col-span-3 relative">
+                                            <label className="block mb-2 text-sm font-semibold text-gray-700 tracking-wide">
+                                                Class Admitted
+                                            </label>
+
+                                            <div className="relative">
+                                                <select
+                                                    name="ClassAdmitted"
+                                                    required
+                                                    onChange={handleChange}
+                                                    className="w-full appearance-none bg-white border border-slate-400 rounded-xl px-4 py-3 text-gray-700 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-blue-400 transition-all duration-200"
+                                                >
+                                                    <option value="" disabled selected>
+                                                        Select Class
+                                                    </option>
+
+                                                    <option>Nursery</option>
+                                                    <option>KG-I</option>
+                                                    <option>KG-II</option>
+                                                    <option>1st Grade</option>
+                                                    <option>2nd Grade</option>
+                                                    <option>3rd Grade</option>
+                                                    <option>4th Grade</option>
+                                                    <option>5th Grade</option>
+                                                    <option>6th Grade</option>
+                                                    <option>7th Grade</option>
+                                                    <option>8th Grade</option>
+                                                    <option>9th Grade</option>
+                                                    <option>10th Grade</option>
+                                                </select>
+                                                <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-400">
+                                                    ▼
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                                 <div>
                                     <h3 className="text-xs font-black text-indigo-600 mb-3 border-b border-indigo-50 pb-1 flex items-center gap-2">
                                         <MapPin size={14} /> RESIDENTIAL ADDRESS
@@ -152,7 +201,7 @@ const Registration = () => {
                                     </div>
                                 </div>
 
-                                <button type="submit" className="w-full mt-6 bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-widest shadow-lg shadow-slate-200">
+                                <button type="submit" onClick={handleSubmit} className="w-full mt-6 bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-widest shadow-lg shadow-slate-200">
                                     <CheckCircle2 size={18} /> Finalize & Generate Sheet
                                 </button>
                             </form>
