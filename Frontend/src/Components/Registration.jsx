@@ -16,7 +16,7 @@ const Registration = () => {
         city: "", contact: "", lastSchool: "", stdBForm: "",
         fatherCnic: "", fatherContact: "", fatherOccupation: "", fatherIncome: ""
     });
-    
+
     const formNo = "ADM-" + Math.floor(1000 + Math.random() * 9000);
     const regDate = new Date().toLocaleDateString("en-GB");
 
@@ -47,7 +47,7 @@ const Registration = () => {
                     <h1 className="text-3xl font-black bg-gradient-to-r from-slate-800 to-indigo-900 bg-clip-text text-transparent tracking-tight">
                         NPS ADMISSION PORTAL
                     </h1>
-                    <p className="text-xs text-slate-500 font-medium">VIP Digital Enrollment System</p>
+                    <p className="text-xs text-slate-500 font-medium">Digital Enrollment System</p>
                 </div>
 
                 <div className="max-w-4xl mx-auto">
