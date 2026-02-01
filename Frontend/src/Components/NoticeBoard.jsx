@@ -8,20 +8,20 @@ import {
 
 const notices = [
     {
-        title: "New Admissions Open",
-        description: "Admissions for classes KG to Grade 10 are open in April 2026.",
+        title: "Registrations Open",
+        description: "Registrations for Grade Pre-Primary to Grade 9 are Open Now!.",
         icon: Megaphone,
         gradient: "from-[#2E3192] to-[#1BFFFF]",
     },
     {
         title: "Holiday Notice",
-        description: "School will remain closed on tomorrow 2nd January for Saturday.",
+        description: "School will remain closed on 4th February 2026 on the occasion of Shab-e-Barat.",
         icon: CalendarDays,
         gradient: "from-[#8E2DE2] to-[#4A00E0]",
     },
     {
         title: "Final Term Exams",
-        description: "Final Term Examination schedule will be uploaded soon on our official Website.",
+        description: "Final Term Examination will be started from 19 of February 2026.",
         icon: AlertTriangle,
         gradient: "from-[#0BA360] to-[#3CBA92]",
     },
