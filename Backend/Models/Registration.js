@@ -1,69 +1,28 @@
 import mongoose from "mongoose"
 
-let { Schema } = mongoose
+const RegistrationSchema = new mongoose.Schema({
+    studentName: { type: String, required: true },
+    dateOfBirth: { type: Date, required: true },
+    stdBFormNo: { type: String, unique: true, sparse: true },
+    gender: { type: String, required: true },
+    religion: { type: String, required: true },
 
-let RegistrationSchema = new mongoose.Schema({
-    StudentName: {
-        type: String,
-        required: true
-    },
-    DateOfBirth: {
-        type: Date,
-        required: true
-    },
-    stdBFormNo: {
-        type: Number,
-        Optional: true,
-        unique: true
-    },
-    gender: {
-        type: String,
-        required: true
-    },
-    Cast: {
-        type: String,
-        Optional: true
-    },
-    lastSchoolAttended: {
-        type: String,
-        Optional: true
-    },
-    FatherName: {
-        type: String,
-        required: true
-    },
-    FatherCNIC: {
-        type: String,
-        required: true
-    },
-    FatherContactNo: {
-        type: String,
-        required: true
-    },
-    FatherOccupation: {
-        type: String,
-        Optional: true
-    },
-    FatherIncome: {
-        type: Number,
-        Optional: true
-    },
-    Email:{
-        type: String,
-        Optional: true
-    },
-    MotherName: {
-        type: String,
-        required: true
-    },
-    ClassAdmitted: {
-        type: String,
-        required: true
-    },
-    Address: {
-        type: String,
-        required: true
-    }
-})
+    cast: { type: String, optional: true },
+    lastSchoolAttended: { type: String, optional: true },
+
+    fatherName: { type: String, required: true },
+    fatherCNIC: { type: String, required: true },
+    fatherContactNo: { type: String, required: true },
+    fatherOccupation: { type: String },
+    fatherIncome: { type: Number },
+
+    email: { type: String, optional: true },
+    motherName: { type: String, required: true },
+
+    classAdmitted: { type: String, required: true },
+
+    address: { type: String, required: true },
+    city: { type: String, optional: true }
+}, { timestamps: true })
 
 export default mongoose.model("Registration", RegistrationSchema)

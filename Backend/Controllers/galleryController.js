@@ -54,3 +54,18 @@ export const getPosts = async (req, res, next) => {
         return next(error);
     }
 }
+
+export const deletePostById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const post = await Gallery.findById(id);
+        if (!post) {
+            return next(createError(404, "Post not found"));
+        }
+        await Gallery.findByIdAndDelete(id);
+        res.json(createSuccess(200, "Post Deleted Successfully!"))
+
+    } catch (error) {
+        next(error)
+    }
+};

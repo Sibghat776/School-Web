@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import axios from "axios";
 import {
     User, Users, Calendar, MapPin, Phone, School, ShieldCheck,
     Printer, Trash2, BookOpen, CreditCard, Briefcase, Banknote, CheckCircle2,
@@ -9,30 +10,59 @@ import {
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { showToast } from "../utils/commonFunctions";
+import { baseUrl } from "../utils/baseUrl";
 
 const Registration = () => {
     const [submitted, setSubmitted] = useState(false);
+
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
-        studentName: "", fatherName: "", motherName: "", dob: "",
+        studentName: "", fatherName: "", motherName: "", dateOfBirth: "",
         religion: "", gender: "", cast: "", address: "",
-        city: "", contact: "", lastSchool: "", stdBForm: "",
-        fatherCnic: "", fatherContact: "", fatherOccupation: "", fatherIncome: ""
+        city: "", lastSchoolAttended: "", stdBFormNo: "",
+        fatherCNIC: "", fatherContactNo: "", fatherOccupation: "", fatherIncome: "",
+        email: "", classAdmitted: ""
     });
 
-    const formNo = "ADM-" + Math.floor(1000 + Math.random() * 9000);
+    const [data, setData] = useState(null);
+
+    const requiredFields = ["studentName", "fatherName", "motherName", "dateOfBirth", "religion", "gender", "address", "city", "fatherCNIC", "fatherContactNo", "classAdmitted"];
+
+
+
     const regDate = new Date().toLocaleDateString("en-GB");
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
-        formData == "" && showToast("Form data is missing!", "error");
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitted(true);
-        showToast("Admission form submitted successfully!", "success");
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (requiredFields.some(field => !formData[field])) {
+            console.log("Field Missing:", requiredFields.find(field => !formData[field]));
+            showToast("Please fill all required fields!", "error");
+            return;
+        }
+
+        try {
+            setLoading(true);
+
+            console.log("API Hit hui")
+            const res = await axios.post(`${baseUrl}registration/register`, formData);
+            console.log(res)
+            setData(res);
+            setSubmitted(true);
+            showToast(res?.data?.message || "Registered Successfully!", "success");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        } catch (err) {
+            showToast("Submission failed!", "error");
+        } finally {
+            setLoading(false);
+        }
     };
+
 
     const handlePrint = () => { window.print(); };
 
@@ -60,10 +90,10 @@ const Registration = () => {
                                     <User size={18} className="text-indigo-400" />
                                     <span className="text-sm font-bold uppercase tracking-widest">New Admission Form</span>
                                 </div>
-                                <span className="text-[10px] text-slate-400 font-mono">FORM ID: {formNo}</span>
+                                <span className="text-[10px] text-slate-400 font-mono">FORM ID: {"123"}</span>
                             </div>
 
-                            <form onSubmit={handleSubmit} className="p-5">
+                            <form className="p-5">
                                 {/* Section 1: Student Details */}
                                 <div className="mb-4">
                                     <h3 className="text-xs font-black text-indigo-600 mb-3 border-b border-indigo-50 pb-1 flex items-center gap-2">
@@ -76,20 +106,23 @@ const Registration = () => {
                                         </div>
                                         <div>
                                             <label className={labelStyle}>Date of Birth</label>
-                                            <input required type="date" name="dob" onChange={handleChange} className={inputStyle} />
+                                            <input required type="date" name="dateOfBirth" onChange={handleChange} className={inputStyle} />
                                         </div>
                                         <div>
                                             <label className={labelStyle}>Std B-Form # <span className="text-blue-500 font-normal">(Optional)</span></label>
-                                            <input name="stdBForm" onChange={handleChange} className={inputStyle} placeholder="xxxxx-xxxxxxx-x" />
+                                            <input name="stdBFormNo" onChange={handleChange} className={inputStyle} placeholder="xxxxx-xxxxxxx-x" />
                                         </div>
                                         <div>
                                             <label className={labelStyle}>Gender / Religion</label>
                                             <div className="flex gap-2">
-                                                <select name="gender" onChange={handleChange} className={inputStyle}>
-                                                    <option>Male</option><option>Female</option>
+                                                <select name="gender" value={formData.gender} onChange={handleChange} className={inputStyle}>
+                                                    <option value="">Select Gender</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
                                                 </select>
-                                                <select name="religion" onChange={handleChange} className={inputStyle}>
-                                                    <option>Islam</option><option>Other</option>
+                                                <select name="religion" value={formData.religion} onChange={handleChange} className={inputStyle}>
+                                                    <option value="">Select Religion</option>
+                                                    <option value="Islam">Islam</option><option value="Other">Other</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -99,7 +132,7 @@ const Registration = () => {
                                         </div>
                                         <div>
                                             <label className={labelStyle}>Last School <span className="text-blue-500 font-normal">(Optional)</span></label>
-                                            <input name="lastSchool" onChange={handleChange} className={inputStyle} />
+                                            <input name="lastSchoolAttended" onChange={handleChange} className={inputStyle} />
                                         </div>
                                     </div>
                                 </div>
@@ -116,11 +149,11 @@ const Registration = () => {
                                         </div>
                                         <div>
                                             <label className={labelStyle}>Father CNIC #</label>
-                                            <input required name="fatherCnic" onChange={handleChange} className={inputStyle} placeholder="42xxx-xxxxxxx-x" />
+                                            <input required name="fatherCNIC" onChange={handleChange} className={inputStyle} placeholder="42xxx-xxxxxxx-x" />
                                         </div>
                                         <div>
                                             <label className={labelStyle}>Father Cell #</label>
-                                            <input required name="fatherContact" onChange={handleChange} className={inputStyle} />
+                                            <input required name="fatherContactNo" onChange={handleChange} className={inputStyle} />
                                         </div>
                                         <div>
                                             <label className={labelStyle}>Occupation</label>
@@ -132,7 +165,7 @@ const Registration = () => {
                                         </div>
                                         <div>
                                             <label className={labelStyle}>Email</label>
-                                            <input required name="Email" onChange={handleChange} className={inputStyle} />
+                                            <input required name="email" onChange={handleChange} className={inputStyle} />
                                         </div>
                                         <div>
                                             <label className={labelStyle}>Mother's Name</label>
@@ -154,12 +187,14 @@ const Registration = () => {
 
                                             <div className="relative">
                                                 <select
-                                                    name="ClassAdmitted"
+                                                    name="classAdmitted"
                                                     required
+                                                    value={formData.classAdmitted}
+                                                    defaultValue={""}
                                                     onChange={handleChange}
                                                     className="w-full appearance-none bg-white border border-slate-400 rounded-xl px-4 py-3 text-gray-700 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-blue-400 transition-all duration-200"
                                                 >
-                                                    <option value="" disabled selected>
+                                                    <option value="" disabled >
                                                         Select Class
                                                     </option>
 
@@ -201,9 +236,13 @@ const Registration = () => {
                                     </div>
                                 </div>
 
-                                <button type="submit" onClick={handleSubmit} className="w-full mt-6 bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-widest shadow-lg shadow-slate-200">
-                                    <CheckCircle2 size={18} /> Finalize & Generate Sheet
+                                <button type="submit" onClick={handleSubmit} disabled={loading}
+                                    className="w-full mt-6 bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-widest shadow-lg shadow-slate-200 disabled:opacity-50">
+
+                                    {loading ? "Submitting..." : <><CheckCircle2 size={18} /> Finalize & Generate Sheet</>}
+
                                 </button>
+
                             </form>
                         </div>
                     ) : (
@@ -226,7 +265,7 @@ const Registration = () => {
                                         <p className="text-[9px] text-slate-500 font-bold uppercase tracking-tighter">Ghazi Nagar, Usmanabad, Garden West, Karachi</p>
                                     </div>
                                     <div className="text-right border-l pl-4 border-slate-100">
-                                        <p className="text-[10px] font-black text-white bg-slate-900 px-2 py-0.5 rounded">FORM: {formNo}</p>
+                                        <p className="text-[10px] font-black text-white bg-slate-900 px-2 py-0.5 rounded">FORM: {"123"}</p>
                                         <p className="text-[9px] font-bold text-slate-500 mt-1 uppercase">Date: {regDate}</p>
                                     </div>
                                 </div>
@@ -234,16 +273,16 @@ const Registration = () => {
                                 {/* Content Grid - 2 Column for Sheet */}
                                 <div className="grid grid-cols-2 gap-x-8 gap-y-2.5">
                                     {[
-                                        { l: "Student Name", v: formData.studentName },
-                                        { l: "B-Form #", v: formData.stdBForm || "Not Provided" },
-                                        { l: "Father's Name", v: formData.fatherName },
-                                        { l: "Father CNIC", v: formData.fatherCnic },
-                                        { l: "Father Contact", v: formData.fatherContact },
-                                        { l: "Occupation", v: formData.fatherOccupation },
-                                        { l: "Income", v: formData.fatherIncome || "N/A" },
-                                        { l: "Date of Birth", v: formData.dob },
-                                        { l: "Religion/Gender", v: `${formData.religion} / ${formData.gender}` },
-                                        { l: "Last School", v: formData.lastSchool || "N/A" },
+                                        { l: "Student Name", v: data?.data?.data?.studentName },
+                                        { l: "B-Form #", v: data?.data?.data?.stdBFormNo || "Not Provided" },
+                                        { l: "Father's Name", v: data?.data?.data?.fatherName },
+                                        { l: "Father CNIC", v: data?.data?.data?.fatherCNIC },
+                                        { l: "Father Contact", v: data?.data?.data?.fatherContactNo },
+                                        { l: "Occupation", v: data?.data?.data?.fatherOccupation },
+                                        { l: "Income", v: data?.data?.data?.fatherIncome || "N/A" },
+                                        { l: "Date of Birth", v: data?.data?.data?.dateOfBirth },
+                                        { l: "Religion/Gender", v: `${data?.data?.data?.religion} / ${data?.data?.data?.gender}` },
+                                        { l: "Last School", v: data?.data?.data?.lastSchoolAttended || "N/A" },
                                     ].map((item, idx) => (
                                         <div key={idx} className="flex flex-col border-b border-slate-200">
                                             <span className="text-[9px] font-black text-indigo-900 uppercase tracking-widest">{item.l}</span>

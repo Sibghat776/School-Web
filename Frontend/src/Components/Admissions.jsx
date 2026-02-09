@@ -64,7 +64,7 @@ const Admission = () => {
                         </div>
                     </div>
                     <div className="text-center mt-10">
-                        <a href={AdmissionForm} className='bg-black text-white px-6 py-3 shadow-lg hover:bg-gray-800 rounded' >Register Now</a>
+                        <a href="/registration" className='bg-black text-white px-6 py-3 shadow-lg hover:bg-gray-800 rounded' >Register Now</a>
                     </div>
                     <div className="text-center mt-12">
                         <p className="text-lg text-gray-800">
@@ -80,7 +80,7 @@ const Admission = () => {
                                         rel="noopener noreferrer"
                                         className="text-green-600 hover:underline"
                                     >
-                                        0315 2779033 
+                                        0315 2779033
                                     </a>
                                     &nbsp;or&nbsp;
                                     Campus II : <a
