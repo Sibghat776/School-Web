@@ -41,15 +41,17 @@ const Registration = () => {
         e.preventDefault();
         if (requiredFields.some(field => !formData[field])) {
             console.log("Field Missing:", requiredFields.find(field => !formData[field]));
-            showToast("Please fill all required fields!", "error");
+            let missingField = requiredFields.find(field => !formData[field])
+            if (missingField === "classAdmitted") missingField = "Class Admitted"
+            showToast(`Please fill ${missingField} field`, "error");
             return;
         }
 
         try {
             setLoading(true);
 
-            console.log("API Hit hui")
             const res = await axios.post(`${baseUrl}registration/register`, formData);
+            console.log("API Hit hui")
             console.log(res)
             setData(res);
             setSubmitted(true);
@@ -57,7 +59,7 @@ const Registration = () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
         } catch (err) {
-            showToast("Submission failed!", "error");
+            showToast(err?.response?.data?.message || "Submission failed!", "error");
         } finally {
             setLoading(false);
         }
@@ -257,21 +259,54 @@ const Registration = () => {
                                 </button>
                             </div>
 
-                            <div className="bg-white p-6 shadow-2xl rounded-sm border-[6px] border-double border-slate-200 relative print:shadow-none print:border-slate-800">
-                                {/* Header Compact */}
-                                <div className="border-b-2 border-slate-800 pb-3 mb-4 flex justify-between items-center">
-                                    <div>
-                                        <h2 className="text-2xl font-black text-slate-900 leading-tight tracking-tighter">NOOR PUBLIC SCHOOL</h2>
-                                        <p className="text-[9px] text-slate-500 font-bold uppercase tracking-tighter">Ghazi Nagar, Usmanabad, Garden West, Karachi</p>
+                            <div className="relative bg-white p-10 shadow-2xl rounded-2xl border border-slate-200 print:shadow-none print:border-slate-800 overflow-hidden">
+
+                                {/* Premium Top Gradient Bar */}
+                                <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-indigo-700 via-blue-600 to-emerald-500"></div>
+
+                                {/* Watermark Background */}
+                                <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+                                    <img src="" alt="School Watermark" className="w-96" />
+                                </div>
+
+                                {/* Header Section */}
+                                <div className="relative z-10 flex justify-between items-center border-b-2 border-slate-800 pb-5 mb-8">
+
+                                    {/* Logo + School Info */}
+                                    <div className="flex items-center gap-5">
+                                        <img
+                                            src="../assets/logo.png"  /* 👈 Yahan apna logo src lagana */
+                                            alt="School Logo"
+                                            className="w-20 h-20 object-contain"
+                                        />
+
+                                        <div>
+                                            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
+                                                NOOR PUBLIC SCHOOL
+                                            </h2>
+                                            <p className="text-sm text-slate-600 font-semibold uppercase tracking-wide">
+                                                Ghazi Nagar, Usmanabad, Garden West, Karachi
+                                            </p>
+                                            <p className="text-xs mt-1 text-indigo-600 font-bold uppercase tracking-widest">
+                                                Official Admission Registration Certificate
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div className="text-right border-l pl-4 border-slate-100">
-                                        <p className="text-[10px] font-black text-white bg-slate-900 px-2 py-0.5 rounded">FORM: {"123"}</p>
-                                        <p className="text-[9px] font-bold text-slate-500 mt-1 uppercase">Date: {regDate}</p>
+
+                                    {/* Form Info */}
+                                    <div className="text-right">
+                                        <p className="text-sm font-bold bg-slate-900 text-white px-4 py-1 rounded-lg shadow-md">
+                                            FORM ID: {"123"}
+                                        </p>
+                                        <p className="text-sm font-semibold text-slate-600 mt-2">
+                                            Date: {regDate}
+                                        </p>
                                     </div>
                                 </div>
 
-                                {/* Content Grid - 2 Column for Sheet */}
-                                <div className="grid grid-cols-2 gap-x-8 gap-y-2.5">
+                                {/* Student Data Grid */}
+                                <div className="relative z-10 grid grid-cols-2 gap-x-12 gap-y-6">
+
                                     {[
                                         { l: "Student Name", v: data?.data?.data?.studentName },
                                         { l: "B-Form #", v: data?.data?.data?.stdBFormNo || "Not Provided" },
@@ -281,37 +316,58 @@ const Registration = () => {
                                         { l: "Occupation", v: data?.data?.data?.fatherOccupation },
                                         { l: "Income", v: data?.data?.data?.fatherIncome || "N/A" },
                                         { l: "Date of Birth", v: data?.data?.data?.dateOfBirth },
-                                        { l: "Religion/Gender", v: `${data?.data?.data?.religion} / ${data?.data?.data?.gender}` },
+                                        { l: "Religion / Gender", v: `${data?.data?.data?.religion} / ${data?.data?.data?.gender}` },
                                         { l: "Last School", v: data?.data?.data?.lastSchoolAttended || "N/A" },
                                     ].map((item, idx) => (
-                                        <div key={idx} className="flex flex-col border-b border-slate-200">
-                                            <span className="text-[9px] font-black text-indigo-900 uppercase tracking-widest">{item.l}</span>
-                                            <span className="text-sm font-bold text-slate-800 uppercase">{item.v}</span>
+                                        <div key={idx} className="flex flex-col bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 hover:shadow-lg transition-all duration-300">
+                                            <span className="text-xs font-bold text-indigo-700 uppercase tracking-widest">
+                                                {item.l}
+                                            </span>
+                                            <span className="text-lg font-semibold text-slate-800 mt-1">
+                                                {item.v}
+                                            </span>
                                         </div>
                                     ))}
-                                    <div className="col-span-2 flex flex-col border-b border-slate-200">
-                                        <span className="text-[9px] font-black text-indigo-900 uppercase tracking-widest">Residential Address</span>
-                                        <span className="text-sm font-bold text-slate-800 uppercase">{formData.address}, {formData.city}</span>
+
+                                    {/* Address Full Width */}
+                                    <div className="col-span-2 flex flex-col bg-slate-50 border border-slate-200 rounded-xl px-5 py-4">
+                                        <span className="text-xs font-bold text-indigo-700 uppercase tracking-widest">
+                                            Residential Address
+                                        </span>
+                                        <span className="text-lg font-semibold text-slate-800 mt-1">
+                                            {formData.address}, {formData.city}
+                                        </span>
                                     </div>
                                 </div>
 
-                                {/* Photo box - absolute */}
-                                <div className="absolute top-24 right-6 w-24 h-28 border border-slate-300 flex items-center justify-center text-[8px] text-slate-400 text-center px-2 print:border-slate-800">
+                                {/* Student Photo Box */}
+                                <div className="absolute top-40 right-12 w-32 h-36 border-2 border-dashed border-indigo-400 rounded-lg flex items-center justify-center text-xs text-indigo-400 bg-white shadow-sm">
                                     STUDENT PHOTO
                                 </div>
 
-                                <div className="mt-6 flex justify-between pt-10 px-4">
-                                    <div className="text-center w-32 border-t border-slate-800 pt-1">
-                                        <p className="text-[9px] font-bold uppercase">Guardian Sign</p>
+                                {/* Signature Section */}
+                                <div className="relative z-10 mt-20 flex justify-between px-16">
+                                    <div className="text-center w-48">
+                                        <div className="border-t-2 border-slate-800 pt-3">
+                                            <p className="text-sm font-bold uppercase tracking-wider text-slate-700">
+                                                Guardian Signature
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div className="text-center w-32 border-t border-slate-800 pt-1">
-                                        <p className="text-[9px] font-bold uppercase">Principal Sign</p>
+                                    <div className="text-center w-48">
+                                        <div className="border-t-2 border-slate-800 pt-3">
+                                            <p className="text-sm font-bold uppercase tracking-wider text-slate-700">
+                                                Principal Signature
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <p className="mt-6 text-center text-[8px] text-slate-400 italic tracking-[0.2em] uppercase border-t pt-2">
+                                {/* Footer */}
+                                <p className="relative z-10 mt-12 text-center text-xs text-slate-400 italic tracking-[0.4em] uppercase border-t pt-4">
                                     NPS Official Computer Generated Document
                                 </p>
+
                             </div>
                         </div>
                     )}
