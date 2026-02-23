@@ -19,7 +19,6 @@ app.use(cors({
 }));
 app.use(helmet())
 
-
 if (process.env.NODE_ENV !== "production") {
     (async () => {
         try {

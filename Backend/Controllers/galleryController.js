@@ -4,6 +4,7 @@ import { createError, createSuccess } from "../utils/commonFunctions.js";
 
 export let addPost = async (req, res, next) => {
     try {
+        console.log("API Form backend")
         if (!req.body)
             return next(createError(401, "Please fill all fields"));
 
@@ -35,7 +36,6 @@ export let addPost = async (req, res, next) => {
         });
 
         await newPost.save();
-
         res.status(201).json(
             createSuccess(201, "Post Added Successfully", newPost)
         );
