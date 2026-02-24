@@ -69,28 +69,3 @@ export const verifyAdmin = (req, res, next) => {
     })
 }
 
-
-
-export const connectDB = async () => {
-    const cached = global.mongoose || {};
-    if (cached.conn) {
-        return cached.conn;
-    }
-
-    if (!cached.promise) {
-        const MONGO = process.env.MONGO;
-        if (!MONGO) throw createError(500, "MongoDB URI not found in env");
-
-        cached.promise = mongoose
-            .connect(MONGO, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            })
-            .then((mongooseInstance) => {
-                console.log("✅ New DB Connected");
-                return mongooseInstance;
-            });
-    }
-    cached.conn = await cached.promise;
-    return cached.conn;
-};
