@@ -66,7 +66,7 @@ const Hero = () => {
 
             {/* Content Container */}
             <div className="relative z-20 max-w-7xl mx-auto h-full flex flex-col justify-center px-6 lg:px-16">
-                <div className="max-w-2xl space-y-8">
+                <div className="max-w-2xl space-y-2">
 
                     {/* Founder Badge */}
                     <div className="inline-flex items-center gap-4 bg-white/5 backdrop-blur-xl p-1.5 pr-6 rounded-full border border-white/20 shadow-2xl animate-fadeInLeft">
@@ -83,13 +83,13 @@ const Hero = () => {
 
                     {/* Main Heading */}
                     <div className="space-y-4">
-                        <h1 className="text-white text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tight animate-fadeInUp">
+                        <h1 className="text-white text-3xl md:text-5xl font-extrabold leading-[1.1] tracking-tight animate-fadeInUp">
                             Shaping The <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9ddeff] to-[#448026]">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9ddeff] to-[#80d854]">
                                 Leaders Of Tomorrow
                             </span>
                         </h1>
-                        <p className="text-gray-200 text-lg md:text-xl max-w-lg leading-relaxed font-light animate-fadeInUp delay-300">
+                        <p className="text-gray-200 text-lg md:text-lg max-w-lg leading-relaxed font-light animate-fadeInUp delay-300">
                             Noor Public School is committed to academic excellence and character building in an inspiring environment.
                         </p>
                     </div>

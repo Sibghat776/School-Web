@@ -4,6 +4,7 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 import { getWhatsappLink } from '../utils/commonFunctions';
 import AdmissionForm from "../documents/Admission_Form.pdf"
+import { Link } from 'react-router-dom';
 
 const Admission = () => {
     return (
@@ -64,7 +65,11 @@ const Admission = () => {
                         </div>
                     </div>
                     <div className="text-center mt-10">
-                        <a href="/registration" className='bg-black text-white px-6 py-3 shadow-lg hover:bg-gray-800 rounded' >Register Now</a>
+                        <Link
+                            to="/registration"
+                            className='bg-black text-white px-6 py-3 shadow-lg hover:bg-gray-800 rounded' >
+                            Register Now
+                        </Link>
                     </div>
                     <div className="text-center mt-12">
                         <p className="text-lg text-gray-800">
@@ -78,7 +83,7 @@ const Admission = () => {
                                         href="https://wa.me/923152779033"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-green-600 hover:underline"
+                                        className="text-green-600 hover:underline hover:text-green-500"
                                     >
                                         0315 2779033
                                     </a>
@@ -87,7 +92,7 @@ const Admission = () => {
                                         href="https://wa.me/923172108821"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-green-600 hover:underline"
+                                        className="text-green-600 hover:underline hover:text-green-500"
                                     >
                                         0317 2108821
                                     </a>
