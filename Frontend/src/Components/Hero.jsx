@@ -1,33 +1,35 @@
 import { useEffect, useState } from "react";
-import { School, GraduationCap, Users } from "lucide-react";
+import { School, GraduationCap, Users, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
+// Assets (Keep your existing imports)
 import FounderImg from "../assets/founder.jpeg";
 import img1 from "../assets/Slides/Image 1.jpeg";
 import img2 from "../assets/Slides/Image 2.jpeg";
 import img3 from "../assets/Slides/Image 3.jpeg";
 import img4 from "../assets/Slides/Image 4.jpeg";
 import img5 from "../assets/Slides/Image 5.jpeg";
-import { Link } from "react-router-dom";
 
 const images = [img1, img2, img3, img4, img5];
 
 const Counter = ({ target }) => {
     const [count, setCount] = useState(0);
-
     useEffect(() => {
         let start = 0;
-        const duration = 1000;
-        const stepTime = Math.max(Math.floor(duration / target), 20);
-
+        const duration = 2000; // Thoda slow aur smooth counter
+        const stepTime = Math.max(Math.floor(duration / target), 30);
         const timer = setInterval(() => {
-            start += 1;
-            setCount(start);
-            if (start === target) clearInterval(timer);
+            start += Math.ceil(target / 50); // Badi values ke liye jump logic
+            if (start >= target) {
+                setCount(target);
+                clearInterval(timer);
+            } else {
+                setCount(start);
+            }
         }, stepTime);
-
         return () => clearInterval(timer);
     }, [target]);
-
-    return <span>{count}</span>;
+    return <span>{count.toLocaleString()}</span>;
 };
 
 const Hero = () => {
@@ -36,104 +38,116 @@ const Hero = () => {
     useEffect(() => {
         const slider = setInterval(() => {
             setIndex((prev) => (prev + 1) % images.length);
-        }, 5000);
+        }, 6000); // 6 seconds for a more relaxed feel
         return () => clearInterval(slider);
     }, []);
+
     return (
-        <section className="relative h-[100vh] w-full overflow-hidden bg-[#1d114e]">
-            {/* Slides */}
+        <section className="relative h-screen w-full overflow-hidden bg-slate-900">
+            {/* Background Slides with Ken Burns Effect */}
             {images.map((img, i) => (
-                <img
+                <div
                     key={i}
-                    src={img}
-                    alt={`slide-${i}`}
-                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out transform ${index === i ? "opacity-100 scale-100" : "opacity-0 scale-105"
+                    className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${index === i ? "opacity-100" : "opacity-0"
                         }`}
-                />
+                >
+                    <img
+                        src={img}
+                        alt={`slide-${i}`}
+                        className={`w-full h-full object-cover transition-transform duration-[7000ms] ease-linear transform ${index === i ? "scale-110" : "scale-100"
+                            }`}
+                    />
+                </div>
             ))}
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#234e18]/60 via-gray-700/40 to-transparent z-10" />
+            {/* Premium Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
 
-            {/* Content */}
-            <div className="relative z-20 max-w-6xl mx-auto h-full flex items-center px-6 md:px-14 mt-5">
-                <div className="max-w-lg space-y-5">
+            {/* Content Container */}
+            <div className="relative z-20 max-w-7xl mx-auto h-full flex flex-col justify-center px-6 lg:px-16">
+                <div className="max-w-2xl space-y-8">
 
-                    {/* Founder Card */}
-                    <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl shadow-lg hover:scale-[1.03] transition">
+                    {/* Founder Badge */}
+                    <div className="inline-flex items-center gap-4 bg-white/5 backdrop-blur-xl p-1.5 pr-6 rounded-full border border-white/20 shadow-2xl animate-fadeInLeft">
                         <img
                             src={FounderImg}
                             alt="Founder"
-                            className="w-14 h-14 rounded-full object-cover border-2 border-[#448026]"
+                            className="w-12 h-12 rounded-full object-cover border-2 border-[#448026]"
                         />
                         <div>
-                            <p className="text-white font-semibold text-base">
-                                Mr. Zaka Ullah
-                            </p>
-                            <p className="text-[#a8d5ba] text-xs tracking-wide">
-                                Founder & Chairman
-                            </p>
+                            <p className="text-white font-medium text-sm leading-none">Mr. Zaka Ullah</p>
+                            <p className="text-[#a8d5ba] text-[10px] uppercase tracking-widest mt-1 font-bold">Founder & Chairman</p>
                         </div>
                     </div>
 
-                    {/* Heading */}
-                    <h1 className="text-white text-4xl md:text-5xl font-bold leading-tight animate-fadeInUp">
-                        Shaping Future Through
-                        <span className="block text-[#9ddeff] mt-1">
-                            Quality Education
-                        </span>
-                    </h1>
+                    {/* Main Heading */}
+                    <div className="space-y-4">
+                        <h1 className="text-white text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tight animate-fadeInUp">
+                            Shaping The <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9ddeff] to-[#448026]">
+                                Leaders Of Tomorrow
+                            </span>
+                        </h1>
+                        <p className="text-gray-200 text-lg md:text-xl max-w-lg leading-relaxed font-light animate-fadeInUp delay-300">
+                            Noor Public School is committed to academic excellence and character building in an inspiring environment.
+                        </p>
+                    </div>
 
-                    {/* Subtitle */}
-                    <p className="text-[#e6e6e6] text-sm md:text-base leading-relaxed animate-fadeInUp delay-200">
-                        Noor Public School is committed to academic excellence,
-                        character building, and disciplined learning in a safe
-                        and inspiring environment.
-                    </p>
+                    {/* CTA Buttons */}
+                    <div className="flex flex-wrap gap-4 pt-4 animate-fadeInUp delay-500">
+                        <Link
+                            to="/registration"
+                            className="group bg-[#448026] hover:bg-[#35631e] text-white px-8 py-4 rounded-full text-sm font-bold shadow-xl transition-all duration-300 flex items-center gap-2"
+                        >
+                            Enroll Your Child
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                        <button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full text-sm font-bold transition-all">
+                            View Prospectus
+                        </button>
+                    </div>
 
-                    {/* Stats */}
-                    <div className="grid grid-cols-3 gap-3 pt-3">
+                    {/* Stats Grid */}
+                    <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 animate-fadeInUp delay-700">
                         {[
-                            { icon: <School className="mx-auto text-[#125e8a]" />, count: 1280, label: "Students" },
-                            { icon: <GraduationCap className="mx-auto text-[#125e8a]" />, count: 48, label: "Teachers" },
-                            { icon: <Users className="mx-auto text-[#125e8a]" />, count: 10, label: "Classes" },
+                            { icon: <Users className="text-[#9ddeff] w-5 h-5" />, count: 1280, label: "Students" },
+                            { icon: <GraduationCap className="text-[#9ddeff] w-5 h-5" />, count: 48, label: "Teachers" },
+                            { icon: <School className="text-[#9ddeff] w-5 h-5" />, count: 10, label: "Modern Labs" },
                         ].map((stat, idx) => (
-                            <div
-                                key={idx}
-                                className="bg-white/10 backdrop-blur-md rounded-xl px-2 py-2 mb-9 text-center border border-white/10 shadow hover:scale-[1.03] transition"
-                            >
-                                {stat.icon}
-                                <p className="text-white text-lg font-semibold">
-                                    <Counter target={stat.count} />+
-                                </p>
-                                <p className="text-[#d4d4d4] text-xs">
+                            <div key={idx} className="group cursor-default">
+                                <div className="flex items-center gap-2 mb-1">
+                                    {stat.icon}
+                                    <span className="text-white text-2xl font-bold tracking-tight">
+                                        <Counter target={stat.count} />+
+                                    </span>
+                                </div>
+                                <p className="text-gray-400 text-xs uppercase tracking-widest font-medium group-hover:text-[#9ddeff] transition-colors">
                                     {stat.label}
                                 </p>
                             </div>
                         ))}
                     </div>
-
-                    {/* CTA */}
-                    <Link to="/registration" className="bg-[#448026] text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow hover:scale-[1.04] transition">
-                        Register Now
-                    </Link>
                 </div>
             </div>
 
-            {/* Animations */}
+            {/* Custom Animations */}
             <style>
                 {`
                 @keyframes fadeInUp {
-                    0% { opacity: 0; transform: translateY(18px); }
+                    0% { opacity: 0; transform: translateY(30px); }
                     100% { opacity: 1; transform: translateY(0); }
                 }
-                .animate-fadeInUp {
-                    animation: fadeInUp 0.9s ease-out forwards;
+                @keyframes fadeInLeft {
+                    0% { opacity: 0; transform: translateX(-30px); }
+                    100% { opacity: 1; transform: translateX(0); }
                 }
-                .animate-fadeInUp.delay-200 {
-                    animation-delay: 0.2s;
-                }
-            `}
+                .animate-fadeInUp { animation: fadeInUp 1s ease-out forwards; }
+                .animate-fadeInLeft { animation: fadeInLeft 1s ease-out forwards; }
+                .delay-300 { animation-delay: 0.3s; }
+                .delay-500 { animation-delay: 0.5s; }
+                .delay-700 { animation-delay: 0.7s; }
+                `}
             </style>
         </section>
     );
