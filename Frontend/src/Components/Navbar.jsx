@@ -114,24 +114,24 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Overlay */}
-            <div className={`fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[-1] transition-opacity duration-300 md:hidden ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            <div className={`fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[-1] transition-opacity duration-300 md:hidden ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                 }`} onClick={() => setOpen(false)} />
 
             {/* Mobile Menu Drawer */}
             <div className={`fixed top-0 right-0 h-screen w-[75%] max-w-sm bg-[#1d114e] shadow-2xl z-[100] transform transition-transform duration-500 ease-in-out md:hidden ${open ? "translate-x-0" : "translate-x-full"
                 }`}>
                 <div className="p-8 flex flex-col h-full">
-                    <div className="flex justify-end mb-8">
+                    <div className="flex justify-end mb-6">
                         <button onClick={() => setOpen(false)} className="text-white/70 hover:text-white"><X size={32} /></button>
                     </div>
 
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 to={link.path}
                                 onClick={() => { setOpen(false); scrollToTop(); }}
-                                className={`block text-2xl font-bold tracking-tight transition-colors ${location.pathname === link.path ? "text-amber-400" : "text-white hover:text-amber-200"
+                                className={`block text-xl font-bold tracking-tight transition-colors ${location.pathname === link.path ? "text-amber-400" : "text-white hover:text-amber-200"
                                     }`}
                             >
                                 {link.name}
