@@ -43,10 +43,10 @@ const Gallery = () => {
 
     const fetchPosts = async () => {
         try {
+            setLoading(true)
             const res = await axios.get(`${baseUrl}gallery/getPosts`);
-            // setLoading(true)
             setPosts(res.data.data || []);
-            // setLoading(false)
+            setLoading(false)
         } catch (err) {
             showToast(err?.response?.data?.message || "Failed to fetch posts", "error");
         }
@@ -111,9 +111,35 @@ const Gallery = () => {
                 </div>
             </section>
             {
-                loading ? <div className="animate-spin border-2 border-black h-12"></div> :
+                loading ?
+                    <div className="w-full flex flex-col items-center justify-center py-24 space-y-6">
+                        <div className="relative flex items-center justify-center h-32 w-32">
+                            {/* Outer Ring - Gold (Slowest) */}
+                            <div className="absolute inset-0 rounded-full border-t-4 border-b-4 border-amber-400/30 border-t-amber-500 animate-[spin_2s_ease_infinite]"></div>
+
+                            {/* Middle Ring - Emerald Green (Reverse) */}
+                            <div className="absolute inset-2 rounded-full border-l-4 border-r-4 border-[#448026]/20 border-l-[#448026] animate-[spin_1.5s_linear_infinite_reverse]"></div>
+
+                            {/* Inner Ring - Navy Blue (Fastest) */}
+                            <div className="absolute inset-4 rounded-full border-t-4 border-[#1d114e]/10 border-t-[#1d114e] animate-spin"></div>
+
+                            {/* Center Pulse - Soft Glow */}
+                            <div className="h-6 w-6 bg-gradient-to-tr from-[#448026] to-amber-500 rounded-full animate-pulse shadow-[0_0_20px_rgba(251,191,36,0.5)]"></div>
+                        </div>
+
+                        {/* Text with Shimmer Effect */}
+                        <div className="text-center">
+                            <p className="text-sm font-bold tracking-[0.3em] text-slate-800 uppercase animate-pulse">
+                                Loading Excellence
+                            </p>
+                            <div className="mt-2 flex gap-1 justify-center">
+                                <div className="h-1 w-1 bg-[#448026] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                                <div className="h-1 w-1 bg-amber-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                                <div className="h-1 w-1 bg-[#1d114e] rounded-full animate-bounce"></div>
+                            </div>
+                        </div>
+                    </div> :
                     <section className="pb-28 px-4 md:px-10 lg:px-20">
-                        {/* --- Upload Form (Refined) --- */}
                         {formVisible && (
                             <div className="max-w-2xl mx-auto mb-20 animate-in fade-in slide-in-from-top-4 duration-500">
                                 <div className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 relative">

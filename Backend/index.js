@@ -43,6 +43,7 @@ const connectDB = async () => {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
+    
     const MONGO = process.env.MONGO; // Vercel env variable name
     if (!MONGO) throw createError(500, "MongoDB URI not found in env");
 
