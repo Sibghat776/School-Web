@@ -103,9 +103,9 @@ const Hero = () => {
                             Enroll Your Child
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Link>
-                        <button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full text-sm font-bold transition-all">
-                            View Prospectus
-                        </button>
+                        <Link to={"/gallery"} className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full text-sm font-bold transition-all">
+                            Our Events
+                        </Link>
                     </div>
 
                     {/* Stats Grid */}

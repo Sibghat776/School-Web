@@ -30,19 +30,28 @@ const Navbar = () => {
     // Classy Link Styling
     const getLinkStyles = (path) => {
         const isActive = location.pathname === path;
-        const isHomeAndNotScrolled = location.pathname === "/" && !scrolled;
 
-        return `relative px-2 py-1 text-[13px] uppercase tracking-[0.15em] font-semibold transition-all duration-300 group ${isActive
-            ? "text-amber-400" // Gold accent for active
-            : isHomeAndNotScrolled ? "text-white hover:text-amber-200" : "text-slate-800 hover:text-[#448026]"
-            } ${scrolled ? "text-white hover:text-amber-200" : ""}`;
+        // 1. Check karein ke kya hum un pages par hain jo transparent se start hote hain
+        const isSpecialPage = location.pathname === "/" || location.pathname === "/contact";
+
+        // 2. Text kab white hona chahiye? 
+        // Ya to hum special page par hon aur scroll na kiya ho, YA phir humne scroll kar liya ho (kyunke scroll par bg dark ho jata hai)
+        const shouldShowWhiteText = (isSpecialPage && !scrolled) || scrolled;
+
+        return `relative px-2 py-1 text-[13px] uppercase tracking-[0.15em] font-black transition-all duration-300 group 
+        ${isActive
+                ? "text-amber-400" // Active link hamesha Gold rahega
+                : shouldShowWhiteText
+                    ? "text-white hover:text-amber-200"
+                    : "text-slate-800 hover:text-[#448026]" // Baaki pages (like Registration) ke liye dark text
+            }`;
     };
 
     return (
         <nav
-            className={`fixed top-0 w-full z-[100] transition-all duration-500 ${scrolled
-                ? "bg-[#1d114e]/50 backdrop-blur-lg py-3 shadow-[0_4px_30px_rgba(0,0,0,0.3)] border-b border-white/10"
-                : "bg-transparent py-5"
+            className={`fixed top-0 w-full z-[100] transition-all duration-700 ${scrolled
+                ? "bg-[#1d114e]/80 backdrop-blur-xl py-3 shadow-[0_10px_40px_rgba(0,0,0,0.3)] border-b border-white/5"
+                : "bg-transparent py-6"
                 }`}
         >
             <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
@@ -50,13 +59,13 @@ const Navbar = () => {
                 {/* Logo & School Name */}
                 <Link to="/" className="flex items-center gap-4 group" onClick={scrollToTop}>
                     <div className="relative">
-                        <img src={logo} alt="Logo" onClick={() => {<Navigate to={"/"}/>}} className="h-14 w-auto drop-shadow-2xl transition-transform duration-500 group-hover:scale-105" />
+                        <img src={logo} alt="Logo" onClick={() => { <Navigate to={"/"} /> }} className="h-14 w-auto drop-shadow-2xl transition-transform duration-500 group-hover:scale-105" />
                         <div className="absolute -inset-1 bg-white/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                     <div className="sm:text-sm">
                         <h1 className={`font-black text-xl tracking-tighter leading-none transition-colors ${location.pathname === "/" || scrolled ? "text-white" : "text-slate-900"
                             }`}>
-                            NOOR <span className="text-[#9dc489]">PUBLIC</span> SCHOOL
+                            NOOR <span className="text-[#caf2b5]">PUBLIC</span> SCHOOL
                         </h1>
                         <p className={`text-[10px] uppercase tracking-[0.3em] font-bold mt-1 ${location.pathname === "/" || scrolled ? "text-cyan-200" : "text-[#448026]"
                             }`}>
@@ -164,7 +173,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav >
     );
 };
 
