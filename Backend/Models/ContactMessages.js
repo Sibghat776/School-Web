@@ -3,17 +3,21 @@ import mongoose from "mongoose"
 let { Schema } = mongoose
 
 let MessagesSchema = new mongoose.Schema({
-    name: {
+    studentName: {
         type: String,
         required: true
     },
-    email: {
+    contactNo: {
+        type: String,
+        required: true
+    },
+    studentClass: {
         type: String,
         required: true
     },
     message: {
         type: String,
-        require: true
+        required: true
     }
 }
     , {

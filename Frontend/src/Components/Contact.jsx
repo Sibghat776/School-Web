@@ -8,28 +8,36 @@ import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 
 const Contact = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
+    const [studentName, setStudentName] = useState("");
+    const [contactNo, setContactNo] = useState("");
+    const [studentClass, setStudentClass] = useState("");
     const [message, setMessage] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!name || !email || !message) {
-            return showToast("Please fill all Fields!", "error", "dark");
+
+        if (!studentName || !contactNo || !studentClass || !message) {
+            return showToast("Please fill all fields!", "error", "dark");
         }
 
         setIsSubmitting(true);
+
         try {
             const res = await axios.post(`${baseUrl}contact/sendMessage`, {
-                name,
-                email,
+                studentName,
+                contactNo,
+                studentClass,
                 message
             });
-            showToast(res.data.message || "Message sent successfully!", "success", "light");
-            setName("");
-            setEmail("");
+            console.log(res)
+            showToast(res.data?.data?.message || "Message sent successfully!", "success", "light");
+
+            setStudentName("");
+            setContactNo("");
+            setStudentClass("");
             setMessage("");
+
         } catch (error) {
             showToast("Something went wrong. Please try again.", "error", "dark");
         } finally {
@@ -159,20 +167,31 @@ const Contact = () => {
                                             <label className="text-xs font-black text-[#1d114e] uppercase tracking-widest ml-1">Full Name</label>
                                             <input
                                                 type="text"
-                                                value={name}
+                                                value={studentName}
                                                 placeholder="Enter your name"
                                                 className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:bg-white focus:border-indigo-200 transition-all font-medium"
-                                                onChange={(e) => setName(e.target.value)}
+                                                onChange={(e) => setStudentName(e.target.value)}
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-xs font-black text-[#1d114e] uppercase tracking-widest ml-1">Email Address</label>
+                                            <label className="text-xs font-black text-[#1d114e] uppercase tracking-widest ml-1">Student Class</label>
                                             <input
-                                                type="email"
-                                                value={email}
-                                                placeholder="e.g. name@mail.com"
+                                                type="string"
+                                                value={studentClass}
+                                                placeholder="e.g. Class IV"
                                                 className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:bg-white focus:border-indigo-200 transition-all font-medium"
-                                                onChange={(e) => setEmail(e.target.value)}
+                                                onChange={(e) => setStudentClass(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-xs font-black text-[#1d114e] uppercase tracking-widest ml-1">Contact Number</label>
+
+                                            <input
+                                                type="number"
+                                                value={contactNo}
+                                                placeholder="e.g. 03000000000"
+                                                className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:bg-white focus:border-indigo-200 transition-all font-medium"
+                                                onChange={(e) => setContactNo(e.target.value)}
                                             />
                                         </div>
                                     </div>

@@ -4,29 +4,28 @@ import dotenv from "dotenv";
 import ContactMessages from "../Models/ContactMessages.js";
 import { createSuccess } from "../utils/commonFunctions.js";
 
+dotenv.config();
 
 export const sendMessage = async (req, res) => {
-    dotenv.config();
-    const { name, email, message } = req.body;
-    console.log("Preparing to send email...");
     try {
         console.log(req.body, "Data")
+        const { studentName, contactNo, studentClass, message } = req.body;
 
         const Message = new ContactMessages({
-            name,
-            email,
+            studentName,
+            contactNo,
+            studentClass,
             message
         })
 
         await Message.save();
         let data = createSuccess(200, "Message delivered successfully!", {
-            name: Message.name,
-            email: Message.email,
+            studentName: Message.name,
+            contactNo: Message.email,
+            studentClass: Message.studentClass,
             message: Message.message
         });
-        res.status(200).json({
-            data
-        });
+        res.status(200).json({ data });
     }
     catch (err) {
         console.error(err);

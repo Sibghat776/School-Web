@@ -26,8 +26,8 @@ const notices = [
         gradient: "from-[#0BA360] to-[#3CBA92]",
     },
     {
-        title: "________________",
-        description: "_______________.",
+        title: "Annual Result Day",
+        description: "The Annual Result Day for the academic year 2025-2026 will be held on April 15, 2026. Parents are requested to attend.",
         icon: Info,
         gradient: "from-[#f7971e] to-[#ffd200]",
     },
