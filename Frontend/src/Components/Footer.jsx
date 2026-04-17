@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Facebook,
     Twitter,
@@ -11,6 +11,13 @@ import {
 } from "lucide-react";
 
 const Footer = () => {
+    const [open, setopen] = useState(false)
+
+    const handleUnlock = () => {
+        setopen(false)
+        console.log("Unlocking the secret message...");
+    }
+
     return (
         <footer className="bg-[#1e1e2f] text-white pt-14 pb-8 px-4 sm:px-8 lg:px-20">
             <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
@@ -76,7 +83,32 @@ const Footer = () => {
 
             {/* Divider & Copyright */}
             <div className="border-t border-white/20 mt-12 pt-6 text-center text-sm text-white/60">
-                © {new Date().getFullYear()} Noor Public School. All rights reserved.
+                <button onClick={() => setopen(!open)} className="hover:text-white transition">
+                    © {new Date().getFullYear()} Noor Public School. All rights reserved.
+                </button>
+                {
+                    open
+                    &&
+                    <>
+                        <div className="">
+                            <h2>Welcome ! Mr. Admin</h2>
+                            <p className="text-sm text-white/80">You're going to Unlock some hidden features!</p>
+                            <input type="text"
+                                placeholder="Enter Your Name"
+                                value={adminName}
+                                onChange={(e) => setAdminName(e.target.value)}
+                                className="bg-transparent border border-white/30 placeholder:text-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                            <input type="password"
+                                placeholder="Enter Admin Password"
+                                value={adminPassword}
+                                onChange={(e) => setAdminPassword(e.target.value)}
+                                className="bg-transparent border border-white/30 placeholder:text-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                            <button onClick={handleUnlock} className="mt-4 px-4 py-2 bg-[#4dabf7] text-white rounded hover:bg-[#4dabf7]/90 transition">Unlock</button>
+                        </div>
+                    </>
+                }
             </div>
         </footer>
     );

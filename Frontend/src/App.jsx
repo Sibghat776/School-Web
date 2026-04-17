@@ -20,6 +20,8 @@ const App = () => {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="*" element={<PageNotFound />} />
+
+
       </Routes>
     </div>
   );
