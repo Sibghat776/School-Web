@@ -8,6 +8,7 @@ import Contact from "./Components/Contact";
 import { ToastContainer } from "react-toastify";
 import Gallery from "./Components/Gallery";
 import Registration from "./Components/Registration";
+import AdminRoutes from "./Private Routes/AdminRoutes";
 
 const App = () => {
   return (
@@ -21,6 +22,8 @@ const App = () => {
         <Route path="/registration" element={<Registration />} />
         <Route path="*" element={<PageNotFound />} />
 
+
+        <Route path="/admin" element={<AdminRoutes />} />
 
       </Routes>
     </div>
