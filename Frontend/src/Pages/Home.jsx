@@ -8,11 +8,27 @@ import Footer from "../Components/Footer";
 
 const Home = () => {
   return (
-    <div className="bg-white overflow-x-hidden scroll-smooth">
+    <div className="bg-white overflow-x-hidden scroll-smooth selection:bg-blue-600 selection:text-white">
+      {/* --- Navigation --- */}
       <Navbar />
+
+      {/* --- Hero Section --- */}
       <Hero />
-      <About/>
-      <NoticeBoard />
+
+      {/* --- Main Content --- */}
+      <main>
+        {/* About Section (Intro & Pillars) */}
+        <section id="about-us">
+          <About />
+        </section>
+
+        {/* Notice Board - Latest Updates */}
+        <section id="announcements">
+          <NoticeBoard />
+        </section>
+      </main>
+
+      {/* --- Footer --- */}
       <Footer />
     </div>
   );

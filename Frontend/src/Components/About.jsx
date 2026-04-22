@@ -5,118 +5,98 @@ import {
     Globe2,
     ShieldCheck,
     Landmark,
-    BookOpen,
     Award,
 } from "lucide-react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 
 const About = () => {
     return (
-        <>
-            <section
-                id="about"
-                className="bg-[#f2f6f9] text-[#1d1449] py-24 px-6 sm:px-10 md:px-24"
-            >
-                <div className="max-w-7xl mx-auto space-y-12">
+        <section id="about" className="bg-[#f2f6f9] text-[#1d1449] py-24 px-6 md:px-24">
+            <div className="max-w-7xl mx-auto space-y-16">
 
-                    {/* Header Section */}
-                    <div className="text-center">
-                        <h2 className="text-4xl sm:text-5xl font-bold text-[#234e18] mb-4">
-                            <span className="text-[#1d1449]">Noor Public School</span>
-                        </h2>
-                        <p className="text-[#444157] text-base sm:text-lg">
-                            Excellence in Education, Character, and Leadership
+                {/* --- Main Header --- */}
+                <div className="text-center space-y-4">
+                    <h2 className="text-4xl sm:text-6xl font-black tracking-tighter uppercase italic">
+                        Noor Public <span className="text-blue-600">School</span>
+                    </h2>
+                    <p className="text-slate-500 font-bold uppercase tracking-[0.3em] text-sm sm:text-base">
+                        Great Education • Strong Character • Future Leaders
+                    </p>
+                </div>
+
+                {/* --- Pillars Grid --- */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    {/* Vision */}
+                    <div className="group bg-white p-8 rounded-[2rem] shadow-xl shadow-blue-500/5 border border-slate-100 hover:border-blue-500/20 transition-all">
+                        <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <Globe2 className="text-blue-600" size={28} />
+                        </div>
+                        <h3 className="text-xl font-black uppercase tracking-tight mb-3">Our Vision</h3>
+                        <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                            We help students become great leaders who have strong Islamic values and the skills to help everyone in the world.
                         </p>
                     </div>
 
-                    {/* Card Grid Section */}
-                    <div>
-                        <h2 className="text-3xl sm:text-4xl font-bold text-center text-[#234e18] mb-16">
-                            Our Guiding Pillars
-                        </h2>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                            {/* Vision */}
-                            <div className="bg-gradient-to-br from-[#e0f4e5] via-[#c6ebc9] to-[#a0d8a5] rounded-2xl shadow-xl border-l-8 border-[#498138] p-8 hover:scale-[1.05] transition-transform duration-300">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <Globe2 className="text-[#234e18]" size={36} />
-                                    <h3 className="text-xl font-bold text-[#234e18]">Our Vision</h3>
-                                </div>
-                                <p className="text-[#3d534d] text-sm leading-relaxed">
-                                    To nurture future leaders grounded in Islamic character,
-                                    academic excellence, and service to humanity.
-                                </p>
-                            </div>
-
-                            {/* Mission */}
-                            <div className="bg-gradient-to-br from-[#e6e0f8] via-[#c8c0f0] to-[#a8a0e0] rounded-2xl shadow-xl border-l-8 border-[#5f5971] p-8 hover:scale-[1.05] transition-transform duration-300">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <GraduationCap className="text-[#1d1449]" size={36} />
-                                    <h3 className="text-xl font-bold text-[#1d1449]">Our Mission</h3>
-                                </div>
-                                <p className="text-[#3d534d] text-sm leading-relaxed">
-                                    To deliver holistic education that combines Islamic values with
-                                    modern academics, preparing students for this world and the
-                                    hereafter.
-                                </p>
-                            </div>
-
-                            {/* Core Values */}
-                            <div className="bg-gradient-to-br from-[#f9f3e3] via-[#f0e2c0] to-[#e6d19c] rounded-2xl shadow-xl border-l-8 border-[#aa934e] p-8 hover:scale-[1.05] transition-transform duration-300">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <HeartHandshake className="text-[#aa934e]" size={36} />
-                                    <h3 className="text-xl font-bold text-[#6b5e3e]">Core Values</h3>
-                                </div>
-                                <ul className="list-disc text-[#3d534d] ml-6 text-sm space-y-1 leading-relaxed">
-                                    <li>Truthfulness & Respect</li>
-                                    <li>Faith & Responsibility</li>
-                                    <li>Excellence in Knowledge</li>
-                                    <li>Service & Leadership</li>
-                                </ul>
-                            </div>
-
-                            {/* Discipline */}
-                            <div className="bg-gradient-to-br from-[#d6f0ff] via-[#a8dbf0] to-[#7cc4e0] rounded-2xl shadow-xl border-l-8 border-[#5a97b1] p-8 hover:scale-[1.05] transition-transform duration-300">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <ShieldCheck className="text-[#1d3c55]" size={36} />
-                                    <h3 className="text-xl font-bold text-[#1d3c55]">Discipline</h3>
-                                </div>
-                                <p className="text-[#3d534d] text-sm leading-relaxed">
-                                    A structured environment promoting punctuality, self-control,
-                                    and dignity in accordance with Islamic values.
-                                </p>
-                            </div>
-
-                            {/* Foundation */}
-                            <div className="bg-gradient-to-br from-[#ffe3e3] via-[#ffc0c0] to-[#ff9c9c] rounded-2xl shadow-xl border-l-8 border-[#cf6363] p-8 hover:scale-[1.05] transition-transform duration-300">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <Landmark className="text-[#cf6363]" size={36} />
-                                    <h3 className="text-xl font-bold text-[#3d3a4d]">Our Foundation</h3>
-                                </div>
-                                <p className="text-[#3d534d] text-sm leading-relaxed">
-                                    Noor Public School is rooted in quality, community service,
-                                    and Islamic tarbiyah — not just a school, but a vision.
-                                </p>
-                            </div>
-
-                            {/* Added New Pillar - Achievements */}
-                            <div className="bg-gradient-to-br from-[#fff1d6] via-[#ffe2a8] to-[#ffd47a] rounded-2xl shadow-xl border-l-8 border-[#e6a23c] p-8 hover:scale-[1.05] transition-transform duration-300">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <Award className="text-[#e6993c]" size={36} />
-                                    <h3 className="text-xl font-bold text-[#b5651d]">Achievements</h3>
-                                </div>
-                                <p className="text-[#3d534d] text-sm leading-relaxed">
-                                    Our students consistently excel in academics, sports, and
-                                    community service, representing the values we instill.
-                                </p>
-                            </div>
-
+                    {/* Mission */}
+                    <div className="group bg-white p-8 rounded-[2rem] shadow-xl shadow-purple-500/5 border border-slate-100 hover:border-purple-500/20 transition-all">
+                        <div className="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <GraduationCap className="text-purple-600" size={28} />
                         </div>
+                        <h3 className="text-xl font-black uppercase tracking-tight mb-3">Our Mission</h3>
+                        <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                            To provide the best education by mixing Islamic teachings with modern studies, preparing students for success in this life and the next.
+                        </p>
                     </div>
+
+                    {/* Core Values */}
+                    <div className="group bg-white p-8 rounded-[2rem] shadow-xl shadow-amber-500/5 border border-slate-100 hover:border-amber-500/20 transition-all">
+                        <div className="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <HeartHandshake className="text-amber-600" size={28} />
+                        </div>
+                        <h3 className="text-xl font-black uppercase tracking-tight mb-3">Core Values</h3>
+                        <ul className="text-slate-600 text-xs font-bold uppercase tracking-widest space-y-2">
+                            <li className="flex items-center gap-2 italic"> <span className="w-1.5 h-1.5 bg-amber-500 rounded-full"></span> Honesty & Respect</li>
+                            <li className="flex items-center gap-2 italic"> <span className="w-1.5 h-1.5 bg-amber-500 rounded-full"></span> Faith & Hard Work</li>
+                            <li className="flex items-center gap-2 italic"> <span className="w-1.5 h-1.5 bg-amber-500 rounded-full"></span> Helping Others</li>
+                        </ul>
+                    </div>
+
+                    {/* Discipline */}
+                    <div className="group bg-white p-8 rounded-[2rem] shadow-xl shadow-emerald-500/5 border border-slate-100 hover:border-emerald-500/20 transition-all">
+                        <div className="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <ShieldCheck className="text-emerald-600" size={28} />
+                        </div>
+                        <h3 className="text-xl font-black uppercase tracking-tight mb-3">Discipline</h3>
+                        <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                            We teach students to be on time, follow rules, and respect everyone according to Islamic manners.
+                        </p>
+                    </div>
+
+                    {/* Foundation */}
+                    <div className="group bg-white p-8 rounded-[2rem] shadow-xl shadow-rose-500/5 border border-slate-100 hover:border-rose-500/20 transition-all">
+                        <div className="w-14 h-14 bg-rose-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <Landmark className="text-rose-600" size={28} />
+                        </div>
+                        <h3 className="text-xl font-black uppercase tracking-tight mb-3">Our History</h3>
+                        <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                            Established in 1998, Noor Public School is built on trust, quality teaching, and good Islamic upbringing.
+                        </p>
+                    </div>
+
+                    {/* Achievements */}
+                    <div className="group bg-white p-8 rounded-[2rem] shadow-xl shadow-cyan-500/5 border border-slate-100 hover:border-cyan-500/20 transition-all">
+                        <div className="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <Award className="text-cyan-600" size={28} />
+                        </div>
+                        <h3 className="text-xl font-black uppercase tracking-tight mb-3">Success</h3>
+                        <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                            Our students always do great in exams, sports, and helping the community. We are proud of their hard work.
+                        </p>
+                    </div>
+
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     );
 };
 

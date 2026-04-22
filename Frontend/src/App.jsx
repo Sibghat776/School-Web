@@ -12,6 +12,7 @@ import AdminRoutes from "./Private Routes/AdminRoutes";
 import AdminDashboard from "./Pages/AdminDashboard";
 import Overview from "./Admin Dashboard/Overview";
 import TeachersList from "./Admin Dashboard/TeachersList";
+import AdminSettings from "./Admin Dashboard/Settings";
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
             <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<Overview />} />
             <Route path="teachers" element={<TeachersList />} />
+            <Route path="settings" element={<AdminSettings />} />
             {/* Future Admin Pages */}
           </Route >
         </Route>
