@@ -10,7 +10,7 @@ import {
 
 const notices = [
     {
-        title: "Admission Open",
+        title: "Admissions Open",
         description: "Admission for Grade Pre-Primary to Grade 9 are Open Now for the Session 2026 - 27.",
         icon: Megaphone,
         gradient: "from-blue-600 to-cyan-400",
