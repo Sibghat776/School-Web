@@ -141,9 +141,14 @@ const Gallery = () => {
                             </div>
                         </div>
                     )}
-
-                    {/* --- Folder Grid --- */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    {
+                        posts.length === 0 ? (
+                            <div className="w-full flex flex-col items-center justify-center py-24">
+                                <FolderOpen size={48} className="text-slate-300" />
+                                <p className="mt-4 font-bold text-slate-400">No Pictures yet.</p>
+                            </div>
+                        ):
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                         {posts.map((post, idx) => (
                             <div
                                 key={idx}
@@ -182,6 +187,7 @@ const Gallery = () => {
                             </div>
                         ))}
                     </div>
+                    }
 
                     {/* --- Cinematic Lightbox (Album Viewer) --- */}
                     {selectedPostIndex !== null && (
@@ -195,13 +201,13 @@ const Gallery = () => {
                                     href={posts[selectedPostIndex].imageUrl[currentImgIndex]}
                                     download
                                     onClick={(e) => e.stopPropagation()}
-                                    className="bg-white/10 hover:bg-white text-white hover:text-slate-900 h-12 w-12 flex items-center justify-center rounded-xl backdrop-blur-md transition-all"
+                                    className="bg-blue-400 hover:bg-white text-white hover:text-slate-900 h-12 w-12 flex items-center justify-center rounded-xl backdrop-blur-md transition-all"
                                 >
                                     <Download size={20} />
                                 </a>
                                 <button
                                     onClick={() => setSelectedPostIndex(null)}
-                                    className="bg-white/10 hover:bg-red-500 text-white h-12 w-12 flex items-center justify-center rounded-xl backdrop-blur-md transition-all"
+                                    className="bg-red-500 hover:bg-red-600 text-white h-12 w-12 flex items-center justify-center rounded-xl backdrop-blur-md transition-all"
                                 >
                                     <X size={20} />
                                 </button>
@@ -213,9 +219,9 @@ const Gallery = () => {
                                 {/* Prev Button */}
                                 <button
                                     onClick={handlePrevImage}
-                                    className="absolute left-4 md:left-10 z-10 bg-white/10 hover:bg-indigo-600 text-white h-14 w-14 flex items-center justify-center rounded-full backdrop-blur-md transition-all group"
+                                    className="absolute left-4 md:left-10 z-10 bg-black/80 hover:bg-indigo-600 text-white h-14 w-14 flex items-center justify-center rounded-full backdrop-blur-md transition-all group"
                                 >
-                                    <MoveLeftIcon size={24} className="group-hover:-translate-x-1 transition-transform" />
+                                    <MoveLeftIcon size={24} className="group-hover:-translate-x- transition-transform" />
                                 </button>
 
                                 {/* Content Display */}
@@ -245,7 +251,7 @@ const Gallery = () => {
                                 {/* Next Button */}
                                 <button
                                     onClick={handleNextImage}
-                                    className="absolute right-4 md:right-10 z-10 bg-white/10 hover:bg-indigo-600 text-white h-14 w-14 flex items-center justify-center rounded-full backdrop-blur-md transition-all group"
+                                    className="absolute right-4 md:right-10 z-10 bg-black/80 hover:bg-indigo-600 text-white h-14 w-14 flex items-center justify-center rounded-full backdrop-blur-md transition-all group"
                                 >
                                     <MoveRightIcon size={24} className="group-hover:translate-x-1 transition-transform" />
                                 </button>

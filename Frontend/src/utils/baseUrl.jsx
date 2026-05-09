@@ -1,1 +1,1 @@
-export const baseUrl = "https://nps-backend.vercel.app/api/"
+export const baseUrl = "https://nps-backend.vercel.app/api/";

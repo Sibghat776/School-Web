@@ -10,20 +10,20 @@ import {
 
 const notices = [
     {
-        title: "Admissions Open",
-        description: "Admission for Grade Pre-Primary to Grade 9 are Open Now for the Session 2026 - 27.",
-        icon: Megaphone,
-        gradient: "from-blue-600 to-cyan-400",
-        tag: "Admission"
-    },
-    {
-        title: "Break Time",
-        description: "School Break Time 10:00 AM to 10:30 AM tak ha !",
-        icon: CalendarDays,
-        gradient: "from-indigo-600 to-purple-500",
-        tag: "Time"
-    },
-    {
+            title: "Admissions Open",
+            description: "Admission for Grade Pre-Primary to Grade 9 are Open Now for the Session 2026 - 27.",
+            icon: Megaphone,
+            gradient: "from-blue-600 to-cyan-400",
+            tag: "Admission"
+        },
+        {
+            title: "Break Time",
+            description: "School Break Time 10:00 AM to 10:30 AM tak ha !",
+            icon: CalendarDays,
+            gradient: "from-indigo-600 to-purple-500",
+            tag: "Time"
+        },
+        {
         title: "School Timing",
         description: "School ka Main Gate 7:30 AM Se Khulega aur 8:00 AM Pe Gate Band Ho Jayega. Please be on time.",
         icon: AlertTriangle,

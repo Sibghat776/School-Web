@@ -3,7 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import mongoose from "mongoose";
-import createError from "http-errors"; // agar aap use kar rahe ho
+import createError from "http-errors";
+
 import { contactRoute } from "./Routes/contactRoute.js";
 import { galleryRouter } from "./Routes/galleryRoute.js";
 import { registrationRouter } from "./Routes/registrationRoute.js";
@@ -15,10 +16,12 @@ const app = express();
 // ------------------- Middlewares -------------------
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({
-  origin: process.env.CLIENT_URL || true,
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || true,
+    credentials: true,
+  }),
+);
 app.use(helmet());
 
 // ------------------- Routes -------------------
@@ -33,45 +36,54 @@ app.use((err, req, res, next) => {
     success: false,
     status,
     message: err.message || "Something went wrong",
-    stack: err.stack
   });
 });
 
-// ------------------- DB Connection -------------------
+// ------------------- DB CONNECTION (SAFE + VERCEL READY) -------------------
+const MONGO = process.env.MONGO;
+
+if (!MONGO) {
+  throw new Error("❌ MongoDB URI not found in env");
+}
+
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
 const connectDB = async () => {
-  const cached = global.mongoose || {};
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
-    
-    const MONGO = process.env.MONGO; // Vercel env variable name
-    if (!MONGO) throw createError(500, "MongoDB URI not found in env");
-
-    cached.promise = mongoose.connect(MONGO, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }).then((mongooseInstance) => {
+    cached.promise = mongoose.connect(MONGO).then((m) => {
       console.log("✅ MongoDB Connected");
-      return mongooseInstance;
+      return m;
     });
   }
 
   cached.conn = await cached.promise;
-  global.mongoose = cached; // cache globally
   return cached.conn;
 };
 
-// ------------------- Local server only -------------------
+// ------------------- LOCAL SERVER ONLY -------------------
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 5000;
-  connectDB().then(() => {
-    app.listen(PORT, () => console.log(`🚀 Server running on ${PORT}`));
-  }).catch(err => {
-    console.error("DB connection failed:", err);
-    process.exit(1);
-  });
+
+  connectDB()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`🚀 Server running on ${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error("DB connection failed:", err);
+      process.exit(1);
+    });
 }
 
-// ------------------- Vercel Export -------------------
-await connectDB(); // ensure DB connected in serverless function
-export default app;
+// ------------------- VERCEL HANDLER -------------------
+export default async function handler(req, res) {
+  await connectDB();
+  return app(req, res);
+}
