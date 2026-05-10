@@ -65,7 +65,7 @@ const Registration = () => {
         fatherCNIC: React.createRef(),
         fatherContactNo: React.createRef(),
         classAdmitted: React.createRef(),
-        stdBFormNo: React.createRef() // Added safety mapping
+        stdBFormNo: React.createRef(),
     };
     
     const handleSubmit = async (e) => {
@@ -76,7 +76,6 @@ const Registration = () => {
         if (missingField) {
             const label = fieldLabels[missingField] || missingField;
             showToast(`Please fill ${label}`, "error");
-            
             // Auto focus on the missing input
             if (inputRefs[missingField]?.current) {
                 inputRefs[missingField].current.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -91,7 +90,8 @@ const Registration = () => {
             const res = await axios.post(`${baseUrl}registration/register`, formData);
             setData(res);
             setSubmitted(true);
-            
+            formData.id = res?.data?.data?._id || "N/A";
+            console.log(formData.id)
             showToast(res?.data?.message || "Registered Successfully!", "success");
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err) {
@@ -382,7 +382,7 @@ const Registration = () => {
                                 <div className="relative z-10 flex justify-between mb-8 text-xs border-b border-dashed border-slate-200 pb-3">
                                     <div className="flex gap-2">
                                         <span className="font-extrabold text-slate-500 uppercase tracking-widest">Form ID:</span>
-                                        <span className="font-mono font-black text-indigo-950 px-2.5 py-0.5 bg-slate-100 rounded">{data?.data?._id.slice(-5)}</span>
+                                        <span className="font-mono font-black text-indigo-950 px-2.5 py-0.5 bg-slate-100 rounded">{formData.id.slice(-5)}</span>
                                     </div>
                                     <div className="flex gap-2">
                                         <span className="font-extrabold text-slate-500 uppercase tracking-widest">Enrolled Class:</span>
