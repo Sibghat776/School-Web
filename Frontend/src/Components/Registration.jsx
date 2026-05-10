@@ -22,7 +22,7 @@ const Registration = () => {
         religion: "", gender: "", cast: "", address: "",
         city: "", lastSchoolAttended: "", stdBFormNo: "",
         fatherCNIC: "", fatherContactNo: "", fatherOccupation: "", fatherIncome: "",
-        email: "", classAdmitted: ""
+        email: "", classAdmitted: "", id: ""
     });
 
     const [data, setData] = useState(null);
@@ -67,30 +67,31 @@ const Registration = () => {
         classAdmitted: React.createRef(),
         stdBFormNo: React.createRef() // Added safety mapping
     };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
         const missingField = requiredFields.find(field => !formData[field]);
-
+        
         if (missingField) {
             const label = fieldLabels[missingField] || missingField;
             showToast(`Please fill ${label}`, "error");
-
+            
             // Auto focus on the missing input
             if (inputRefs[missingField]?.current) {
                 inputRefs[missingField].current.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 inputRefs[missingField].current.focus({ preventScroll: true });
             }
-
+            
             return;
         }
-
+        
         try {
             setLoading(true);
             const res = await axios.post(`${baseUrl}registration/register`, formData);
             setData(res);
             setSubmitted(true);
+            
             showToast(res?.data?.message || "Registered Successfully!", "success");
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err) {
@@ -99,7 +100,7 @@ const Registration = () => {
             setLoading(false);
         }
     };
-
+    
     const handlePrint = () => {
         if (!admissioSheetRef.current) return;
 
@@ -147,7 +148,7 @@ const Registration = () => {
                                         <span className="text-[10px] font-semibold text-slate-400 uppercase">Academic Session 2026-27</span>
                                     </div>
                                 </div>
-                                <span className="text-[11px] text-indigo-300 font-mono font-black bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">FORM ID: 123</span>
+                                <span className="text-[11px] text-indigo-300 font-mono font-black bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">FORM ID: {res.data._id.slice(-5)}</span>
                             </div>
 
                             <form className="p-6 md:p-8 space-y-8">
