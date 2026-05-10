@@ -382,7 +382,7 @@ const Registration = () => {
                                 <div className="relative z-10 flex justify-between mb-8 text-xs border-b border-dashed border-slate-200 pb-3">
                                     <div className="flex gap-2">
                                         <span className="font-extrabold text-slate-500 uppercase tracking-widest">Form ID:</span>
-                                        <span className="font-mono font-black text-indigo-950 px-2.5 py-0.5 bg-slate-100 rounded">{res?.data?._id.slice(-5)}</span>
+                                        <span className="font-mono font-black text-indigo-950 px-2.5 py-0.5 bg-slate-100 rounded">{data?.data?._id.slice(-5)}</span>
                                     </div>
                                     <div className="flex gap-2">
                                         <span className="font-extrabold text-slate-500 uppercase tracking-widest">Enrolled Class:</span>
