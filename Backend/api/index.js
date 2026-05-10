@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || true,
+  origin: process.env.MONGO || true,
   credentials: true
 }));
 
