@@ -148,7 +148,7 @@ const Registration = () => {
                                         <span className="text-[10px] font-semibold text-slate-400 uppercase">Academic Session 2026-27</span>
                                     </div>
                                 </div>
-                                <span className="text-[11px] text-indigo-300 font-mono font-black bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">FORM ID: {res.data._id.slice(-5)}</span>
+                                <span className="text-[11px] text-indigo-300 font-mono font-black bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">NPS - Official</span>
                             </div>
 
                             <form className="p-6 md:p-8 space-y-8">
@@ -382,7 +382,7 @@ const Registration = () => {
                                 <div className="relative z-10 flex justify-between mb-8 text-xs border-b border-dashed border-slate-200 pb-3">
                                     <div className="flex gap-2">
                                         <span className="font-extrabold text-slate-500 uppercase tracking-widest">Form ID:</span>
-                                        <span className="font-mono font-black text-indigo-950 px-2.5 py-0.5 bg-slate-100 rounded">#123</span>
+                                        <span className="font-mono font-black text-indigo-950 px-2.5 py-0.5 bg-slate-100 rounded">{res?.data?._id.slice(-5)}</span>
                                     </div>
                                     <div className="flex gap-2">
                                         <span className="font-extrabold text-slate-500 uppercase tracking-widest">Enrolled Class:</span>
