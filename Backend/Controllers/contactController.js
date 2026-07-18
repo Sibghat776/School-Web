@@ -25,7 +25,7 @@ export const sendMessage = async (req, res) => {
             studentClass: Message.studentClass,
             message: Message.message
         });
-        res.status(200).json({ data });
+        res.status(200).json(data);
     }
     catch (err) {
         console.error(err);
@@ -40,7 +40,7 @@ export const getMessages = async (req, res, next) => {
     try {
         const messages = (await ContactMessages.find()).sort({ createdAt: -1 });
         let data = createSuccess(200, "Messages Fetched Successfully", { messages });
-        res.status(200).json({ data });
+        res.status(200).json(data);
     } catch (error) {
 
     }

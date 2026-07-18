@@ -147,14 +147,54 @@ export const deleteAllStudents = async (req, res, next) => {
 };
 
 export const deleteStudentById = async (req, res, next) => {
-    try {
-        const student = await Registration.findByIdAndDelete(req.params.id);
-        if (!student) {
-            return next(createError(404, "Student not found"));
-        }
-        const data = createSuccess(200, "Student deleted successfully", student);
-        res.status(200).json(data);
-    } catch (error) {
-        next(error);
+  try {
+    const student = await Registration.findByIdAndDelete(req.params.id);
+    if (!student) {
+      return next(createError(404, "Student not found"));
     }
+    const data = createSuccess(200, "Student deleted successfully", student);
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// ================= UPDATE REGISTRATION STATUS (Approve / Reject) =================
+export const updateStatus = async (req, res, next) => {
+  try {
+    const { status, grNumber } = req.body || {};
+    const allowed = ["Pending", "Approved", "Rejected"];
+    if (!allowed.includes(status)) {
+      return next(createError(400, "Invalid status value"));
+    }
+
+    const student = await Registration.findById(req.params.id);
+    if (!student) {
+      return next(createError(404, "Registration not found"));
+    }
+
+    student.status = status;
+    student.reviewedAt = new Date();
+
+    if (status === "Approved") {
+      // Assign GR number: use provided one or auto-generate from timestamp
+      if (grNumber && grNumber.toString().trim()) {
+        const existing = await Registration.exists({ grNumber: grNumber.toString().trim() });
+        if (existing) {
+          return next(createError(409, "GR number already in use"));
+        }
+        student.grNumber = grNumber.toString().trim();
+      } else if (!student.grNumber) {
+        student.grNumber = "GR" + Date.now().toString().slice(-8);
+      }
+    }
+
+    await student.save();
+
+    res.status(200).json(
+      createSuccess(200, `Registration ${status.toLowerCase()}`, student)
+    );
+  } catch (error) {
+    next(error);
+  }
 };

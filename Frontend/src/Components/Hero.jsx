@@ -108,6 +108,22 @@ const Hero = () => {
                         </Link>
                     </div>
 
+                    {/* Portal Access Buttons */}
+                    <div className="flex flex-wrap gap-3 pt-6 animate-fadeInUp delay-700">
+                        <Link
+                            to="/teacher/login"
+                            className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all"
+                        >
+                            Teacher Portal
+                        </Link>
+                        <Link
+                            to="/student/login"
+                            className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all"
+                        >
+                            Student Portal
+                        </Link>
+                    </div>
+
                     {/* Stats Grid */}
                     <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 animate-fadeInUp delay-700">
                         {[

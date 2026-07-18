@@ -18,7 +18,7 @@ export const createSuccess = (status, message, data = {}) => {
 }
 
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = (req, res, next, callback) => {
     try {
         const authHeader = req.headers.authorization;
         let token;
@@ -32,40 +32,50 @@ export const verifyToken = (req, res, next) => {
         if (!token) {
             return next(createError(401, "You are not authenticated!"));
         }
-        // Verify the token
 
-        jwt.verify(token, process.env.JWT, (err, user) => {
+        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
             if (err) {
-                console.error("JWT Verification Error:", err); // Debugging
-                return next(createError(403, "Token is not valid!")); // 403 for invalid/expired token
+                console.error("JWT Verification Error:", err);
+                return next(createError(403, "Token is not valid!"));
             }
-            req.user = user; // Attach decoded user payload to req.user
+            req.user = user;
+            if (typeof callback === "function") {
+                return callback();
+            }
             next();
         });
     } catch (error) {
-        next(error)
+        next(error);
     }
-}
+};
+
+// Generic role guard: pass allowed roles array
+export const verifyRole = (roles = []) => (req, res, next) => {
+    verifyToken(req, res, next, () => {
+        if (roles.includes(req.user.role)) {
+            return next();
+        }
+        return next(createError(401, "You are not authorized"));
+    });
+};
 
 export const verifyUser = (req, res, next) => {
     verifyToken(req, res, next, () => {
         if (req.user.id === req.params.id || req.user.isAdmin) {
-            next()
+            next();
+        } else {
+            next(createError(401, "You are not authorized"));
         }
-        else {
-            next(createError(401, "You are note authorized"))
-        }
-    })
-}
+    });
+};
 
 export const verifyAdmin = (req, res, next) => {
     verifyToken(req, res, next, () => {
         if (req.user.isAdmin) {
-            next()
+            next();
+        } else {
+            next(createError(401, "You are not authorized"));
         }
-        else {
-            next(createError(401, "You are not authorized"))
-        }
-    })
-}
+    });
+};
 

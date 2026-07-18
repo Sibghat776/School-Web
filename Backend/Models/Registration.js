@@ -22,7 +22,11 @@ const RegistrationSchema = new mongoose.Schema({
     classAdmitted: { type: String, required: true },
 
     address: { type: String, required: true },
-    city: { type: String, optional: true }
+    city: { type: String, optional: true },
+
+    status: { type: String, enum: ["Pending", "Approved", "Rejected"], default: "Pending" },
+    grNumber: { type: String, unique: true, sparse: true },
+    reviewedAt: { type: Date },
 }, { timestamps: true })
 
 export default mongoose.model("Registration", RegistrationSchema)
